@@ -1,0 +1,145 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Level 5 Capstone · Build an agent | Panchakosha AI</title>
+<meta name="description" content="The Level 5 capstone: design and build a small tool-using agent on the Claude API that completes a multi-step task with a real tool, then measure its reliability with an eval harness. Includes a brief, starter code, and success criteria.">
+<link rel="canonical" href="https://sreenivas-sadhu-prabhakara.github.io/panchakosha-ai/level-5/capstone.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23e07a54' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='9.5' fill='none' stroke='%239b7be0' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%23e8b84b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/kosha.css">
+
+<body class="l5">
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="../index.html"><svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#e07a54" stroke-width="2"/><circle cx="16" cy="16" r="9.5" fill="none" stroke="#9b7be0" stroke-width="2"/><circle cx="16" cy="16" r="4.5" fill="#e8b84b"/></svg> Panchakosha&nbsp;AI</a>
+    <button class="nav__toggle" aria-label="Menu" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav__links" id="navlinks">
+      <a href="../level-1/index.html">1 · Use</a>
+      <a href="../level-2/index.html">2 · Master</a>
+      <a href="../level-3/index.html">3 · Understand</a>
+      <a href="../level-4/index.html">4 · Build</a>
+      <a href="index.html">5 · Innovate</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap"><p class="crumb"><a href="../index.html">Home</a> → <a href="index.html">Level 5</a> → <span>Capstone</span></p></div>
+
+<main class="wrap section" style="max-width:820px">
+  <p class="capstone__tag">🏛️ Level 5 Capstone</p>
+  <h1 style="margin-top:.4rem">Build an agent</h1>
+  <p class="lede">Prove you can build the intelligence, not just call it. Design and ship a small tool-using agent on the Claude API that completes a real multi-step task with at least one real tool — then measure how reliably it works.</p>
+
+  <div class="capstone" style="margin:2rem 0">
+    <h3 style="margin-top:0">The goal</h3>
+    <p style="margin-bottom:0">Build an agent that <strong>uses at least one real tool inside a reason → act → observe loop</strong> to complete a task it couldn't do in a single reply — a research question, a data lookup, a small calculation-plus-fetch. Then write a short <strong>eval harness</strong> that runs it on several inputs and reports a success rate. You'll exercise every idea in this level: tool use, the agent loop, and evaluation.</p>
+  </div>
+
+  <h2>The four build steps</h2>
+
+  <h3>① Pick a multi-step task</h3>
+  <p>Choose something a single prompt can't reliably answer — it should need a real tool and more than one step. Good picks: "answer trivia by searching a reference source," "look up two facts and compare them," "fetch a page and summarize a section." Write down what "correct" looks like for a few example inputs — you'll need that for the eval.</p>
+
+  <h3>② Define your tools</h3>
+  <p>Each tool is <code>{name, description, input_schema}</code>. Make the description prescriptive about <em>when</em> to use it, and back it with a real implementation (a web/Wikipedia search, an HTTP call, a database query — not a stub).</p>
+  <div class="code"><div class="code__bar"><span class="code__tag">starter · define tools</span><button class="code__copy">copy</button></div><pre>import anthropic
+
+client = anthropic.Anthropic()
+
+tools = [{
+    "name": "search_wikipedia",
+    "description": "Search Wikipedia and return the top result's summary. "
+                   "Use this to look up facts about people, places, and things.",
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "query": {"type": "string", "description": "Search terms"},
+        },
+        "required": ["query"],
+    },
+}]
+
+def run_tool(name, args):
+    if name == "search_wikipedia":
+        return wikipedia_summary(args["query"])   # your REAL implementation
+    raise ValueError(f"unknown tool: {name}")</pre></div>
+
+  <h3>③ Implement the ReAct / tool loop</h3>
+  <p>Call the model, and while it asks for tools (<code>stop_reason == "tool_use"</code>), run them and feed the results back. Always cap the loop so it can never run forever.</p>
+  <div class="code"><div class="code__bar"><span class="code__tag">starter · agent loop</span><button class="code__copy">copy</button></div><pre>def run_agent(question, max_steps=6):
+    messages = [{"role": "user", "content": question}]
+
+    for _ in range(max_steps):                 # hard cap: never loop forever
+        response = client.messages.create(
+            model="claude-sonnet-4-6",
+            max_tokens=1024,
+            tools=tools,
+            messages=messages,
+        )
+        messages.append({"role": "assistant", "content": response.content})
+
+        if response.stop_reason != "tool_use":         # final answer
+            return next(b.text for b in response.content if b.type == "text")
+
+        results = []
+        for block in response.content:
+            if block.type == "tool_use":
+                results.append({
+                    "type": "tool_result",
+                    "tool_use_id": block.id,
+                    "content": run_tool(block.name, block.input),
+                })
+        messages.append({"role": "user", "content": results})
+
+    return "gave up: hit max_steps"</pre></div>
+
+  <h3>④ Add an eval harness</h3>
+  <p>Reliability is a number, not a vibe. Collect a handful of inputs where you know the right answer, write a checker for each, run the agent, and print a success rate.</p>
+  <div class="code"><div class="code__bar"><span class="code__tag">starter · reliability eval</span><button class="code__copy">copy</button></div><pre># Cases: (input, checker). The checker returns True if the output is correct.
+cases = [
+    ("Who wrote Pride and Prejudice? Give one surname.",
+        lambda out: "austen" in out.lower()),
+    ("What is the capital of Australia?",
+        lambda out: "canberra" in out.lower()),
+    ("In what year did the first Moon landing happen?",
+        lambda out: "1969" in out),
+]
+
+passed = 0
+for question, checker in cases:
+    answer = run_agent(question)
+    ok = checker(answer)
+    passed += ok
+    print(f"[{'PASS' if ok else 'FAIL'}] {question}  ->  {answer!r}")
+
+print(f"\nreliability: {passed}/{len(cases)} = {passed / len(cases):.0%}")</pre></div>
+
+  <h2>What to hand in</h2>
+  <p>Three things:</p>
+  <ul>
+    <li>A <strong>repo</strong> — your tool definitions, the agent loop, and the eval harness, with a short README explaining the task.</li>
+    <li>A <strong>transcript or short demo</strong> — one run showing the agent reasoning, calling a tool, observing, and answering.</li>
+    <li>Your <strong>eval numbers</strong> — the success rate over your test cases, and a line on where it failed and why.</li>
+  </ul>
+
+  <div class="call call--insight"><div class="call__k">◆ Success criteria — you've passed when…</div>
+    <p style="margin-bottom:.4rem">✓ Your agent <strong>uses a real tool inside a loop</strong> — not a single one-shot call.<br>
+    ✓ It <strong>handles at least one genuinely multi-step case</strong> (reason → act → observe → answer).<br>
+    ✓ You <strong>measured reliability</strong> — a real success rate over more than one input.<br>
+    ✓ The loop is <strong>bounded</strong> (a max-steps cap) so it can't run away.</p>
+  </div>
+
+  <div class="call call--try"><div class="call__k">▸ Stretch goal</div><p>Go one level up: add a <strong>second agent</strong> — a coordinator that decomposes the task and delegates to a specialist (5.7) — <em>or</em> expose your tool as an <strong>MCP server</strong> (5.6) so any MCP client can use it, not just your script. Then re-run your eval and compare the numbers.</p></div>
+
+  <div class="lnav">
+    <a href="index.html"><small>Back to</small><span>← Level 5 lessons</span></a>
+    <a class="next" href="reference.html"><small>Keep handy</small><span>Level 5 reference pack →</span></a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap" style="color:var(--ink-faint)">© <span data-year>2026</span> Panchakosha AI · Level 5 capstone · <a href="../index.html">Home</a></div>
+</footer>
+<script src="../assets/js/kosha.js"></script>
+</body>

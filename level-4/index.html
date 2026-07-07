@@ -1,0 +1,451 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Level 4 · Build — ship AI apps | Panchakosha AI</title>
+<meta name="description" content="Level 4 of Panchakosha AI: for developers. Ship real AI apps with the Claude API — your first call, prompting in code, a RAG pipeline, deploying on a hyperscaler, evals, guardrails and observability. Ends with a capstone and a reference pack.">
+<link rel="canonical" href="https://sreenivas-sadhu-prabhakara.github.io/panchakosha-ai/level-4/">
+<meta property="og:title" content="Level 4 · Build — ship AI apps">
+<meta property="og:description" content="For developers. Call the Claude API in real code, build RAG, deploy to the cloud, and add evals and guardrails. Capstone + reference pack included.">
+<meta property="og:url" content="https://sreenivas-sadhu-prabhakara.github.io/panchakosha-ai/level-4/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23e07a54' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='9.5' fill='none' stroke='%239b7be0' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%23e8b84b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/kosha.css">
+
+<body class="l4">
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="../index.html">
+      <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#e07a54" stroke-width="2"/><circle cx="16" cy="16" r="9.5" fill="none" stroke="#9b7be0" stroke-width="2"/><circle cx="16" cy="16" r="4.5" fill="#e8b84b"/></svg>
+      Panchakosha&nbsp;AI
+    </a>
+    <button class="nav__toggle" aria-label="Menu" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav__links" id="navlinks">
+      <a href="../level-1/index.html">1 · Use</a>
+      <a href="../level-2/index.html">2 · Master</a>
+      <a href="../level-3/index.html">3 · Understand</a>
+      <a href="index.html" aria-current="page">4 · Build</a>
+      <a href="../level-5/index.html">5 · Innovate</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="crumb"><a href="../index.html">Home</a> → <span>Level 4 · Build</span></p>
+</div>
+
+<header class="wrap pagehead">
+  <p class="eyebrow">Level 4 · Vijnanamaya — the sheath of craft</p>
+  <h1 style="max-width:16ch">Build — ship AI&nbsp;apps</h1>
+  <p class="lede">The sheath of craft: where understanding turns into something you can ship. By the end you'll have called the Claude API in real code, wired up retrieval, deployed a service to the cloud, and wrapped it in evals and guardrails — the whole loop of a working AI app.</p>
+  <div class="chips">
+    <span class="chip">👤 For <b>developers</b></span>
+    <span class="chip">⏱️ <b>~6 hours</b>, hands-on</span>
+    <span class="chip">🧰 8 lessons</span>
+    <span class="chip">🏛️ 1 capstone</span>
+    <span class="chip">🎒 reference pack</span>
+  </div>
+  <div class="hero__cta">
+    <a class="btn btn--solid" href="#l0">Start lesson 4.0 <span class="btn__arrow">→</span></a>
+    <a class="btn btn--ghost" href="capstone.html">Preview the capstone</a>
+  </div>
+</header>
+
+<div class="wrap lesson">
+  <!-- LEFT RAIL -->
+  <aside class="rail" aria-label="Lessons in this course">
+    <p class="rail__title">This course</p>
+    <ol>
+      <li><a href="#l0">4.0 · The shape of an AI app</a></li>
+      <li><a href="#l1">4.1 · Your first API call</a></li>
+      <li><a href="#l2">4.2 · Prompting in code</a></li>
+      <li><a href="#l3">4.3 · Build a RAG pipeline</a></li>
+      <li><a href="#l4">4.4 · Deploy on a hyperscaler</a></li>
+      <li><a href="#l5">4.5 · Evals &amp; testing</a></li>
+      <li><a href="#l6">4.6 · Guardrails &amp; cost</a></li>
+      <li><a href="#l7">4.7 · Observability in prod</a></li>
+      <li><a href="capstone.html">🏛️ Capstone</a></li>
+      <li><a href="reference.html">🎒 Reference pack</a></li>
+    </ol>
+  </aside>
+
+  <!-- MAIN -->
+  <article class="prose">
+
+    <section id="l0">
+      <p class="eyebrow">Lesson 4.0</p>
+      <h2>The shape of an AI app</h2>
+      <p>Almost every AI product has the same three-part shape: a <strong>client</strong> (a browser, a phone app, a CLI), <strong>your backend</strong>, and the <strong>model API</strong>. The one rule that decides the whole architecture: <strong>your API key lives on the backend, never in the client</strong>. Anything shipped to a user's device can be read by that user.</p>
+      <p>So the flow is always: the client sends a request to <em>your</em> server, your server calls the model with your secret key, and you return just the answer.</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">the request loop</span><button class="code__copy">copy</button></div><pre> Browser / app          Your backend             Anthropic API
+ (no API key)           (holds the key)          (the model)
+      │                       │                        │
+      │  POST /ask  ────────▶ │                        │
+      │                       │  messages.create ────▶ │
+      │                       │                        │  (Claude thinks)
+      │                       │  ◀──── response ────── │
+      │  ◀──── JSON answer ── │                        │</pre></div>
+      <p>Here's that backend as a tiny, real service. It's the seed every later lesson grows from:</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">server.py · FastAPI</span><button class="code__copy">copy</button></div><pre>import anthropic
+from fastapi import FastAPI
+from pydantic import BaseModel
+
+app = FastAPI()
+client = anthropic.Anthropic()   # reads ANTHROPIC_API_KEY from the environment
+
+class Ask(BaseModel):
+    question: str
+
+@app.post("/ask")
+def ask(body: Ask):
+    msg = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=1024,
+        messages=[{"role": "user", "content": body.question}],
+    )
+    return {"answer": msg.content[0].text}
+
+# run it:  pip install "anthropic[vertex]" fastapi uvicorn  (anthropic + web deps)
+#          uvicorn server:app --reload</pre></div>
+      <div class="call call--insight"><div class="call__k">◆ Insight</div><p>Everything in this level is a variation on that one endpoint. RAG adds a retrieval step <em>before</em> the model call; guardrails add checks <em>around</em> it; evals test it; deployment ships it. Get the loop clear in your head and the rest is plumbing.</p></div>
+    </section>
+
+    <section id="l1">
+      <p class="eyebrow">Lesson 4.1</p>
+      <h2>Your first API call</h2>
+      <p>The whole API is one endpoint — <code>messages.create</code>. You pass a <strong>model</strong>, a <strong>max_tokens</strong> cap, an optional <strong>system</strong> prompt, and a list of <strong>messages</strong>. You get back content blocks; the text is in <code>content[0].text</code>. Set <code>ANTHROPIC_API_KEY</code> in your environment first (grab one from the console).</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">python</span><button class="code__copy">copy</button></div><pre>import anthropic
+
+client = anthropic.Anthropic()   # reads ANTHROPIC_API_KEY
+
+msg = client.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=1024,
+    system="You are a helpful assistant.",
+    messages=[{"role": "user", "content": "Hello, Claude"}],
+)
+print(msg.content[0].text)</pre></div>
+      <p>The same call in JavaScript / TypeScript, using the official SDK:</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">javascript</span><button class="code__copy">copy</button></div><pre>import Anthropic from "@anthropic-ai/sdk";
+
+const client = new Anthropic();   // reads ANTHROPIC_API_KEY
+
+const msg = await client.messages.create({
+  model: "claude-sonnet-4-6",
+  max_tokens: 1024,
+  system: "You are a helpful assistant.",
+  messages: [{ role: "user", content: "Hello, Claude" }],
+});
+console.log(msg.content[0].text);</pre></div>
+      <p>Networks fail and rate limits happen. The SDK already retries <code>429</code> and <code>5xx</code> errors with exponential backoff (twice by default), so you only add a <code>try/except</code> for the errors you want to surface:</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · errors</span><button class="code__copy">copy</button></div><pre>import anthropic
+
+client = anthropic.Anthropic()
+
+try:
+    msg = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=1024,
+        messages=[{"role": "user", "content": "Hello, Claude"}],
+    )
+    print(msg.content[0].text)
+except anthropic.RateLimitError:
+    print("Rate limited — the SDK already retried; back off and try again later.")
+except anthropic.APIStatusError as e:
+    print(f"API error {e.status_code}: {e.message}")</pre></div>
+      <div class="call call--warn"><div class="call__k">▲ Careful</div><p><strong>Never put your API key in frontend code.</strong> No <code>NEXT_PUBLIC_ANTHROPIC_API_KEY</code>, no key in a mobile bundle, no key in client-side JavaScript. It <em>will</em> be extracted and abused. Always call the model from a backend you control (Lesson 4.0).</p></div>
+    </section>
+
+    <section id="l2">
+      <p class="eyebrow">Lesson 4.2</p>
+      <h2>Prompting in code</h2>
+      <p>Three moves cover most app prompting: a <strong>system prompt</strong> to set the role and rules, <strong>multi-turn messages</strong> to hold a conversation, and <strong>structured output</strong> when your code needs to consume the result.</p>
+      <p>The API is stateless — you send the whole history every time, alternating <code>user</code> and <code>assistant</code>:</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · multi-turn</span><button class="code__copy">copy</button></div><pre>messages = [
+    {"role": "user",      "content": "My name is Ada."},
+    {"role": "assistant", "content": "Nice to meet you, Ada!"},
+    {"role": "user",      "content": "What's my name?"},
+]
+msg = client.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=256,
+    system="You are a concise assistant.",
+    messages=messages,
+)
+print(msg.content[0].text)   # "Your name is Ada."</pre></div>
+      <p>When your program needs to <em>use</em> the answer, ask for JSON and <strong>validate</strong> it — never trust the shape blindly:</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · structured output</span><button class="code__copy">copy</button></div><pre>import json
+
+msg = client.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=512,
+    system="Extract the booking. Reply with ONLY a JSON object, no prose.",
+    messages=[{"role": "user",
+        "content": "Book a table for Ada, 4 people, Friday 7pm."}],
+)
+
+data = json.loads(msg.content[0].text)   # raises if the model returned junk
+assert "party_size" in data              # validate before you trust it
+print(data)</pre></div>
+      <p>And when the model needs to <em>do</em> something — look up weather, query a DB — you give it <strong>tools</strong>. You pass a <code>tools</code> array and watch for <code>stop_reason == "tool_use"</code>:</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · tool use</span><button class="code__copy">copy</button></div><pre>tools = [{
+    "name": "get_weather",
+    "description": "Get the current weather for a city.",
+    "input_schema": {
+        "type": "object",
+        "properties": {"city": {"type": "string"}},
+        "required": ["city"],
+    },
+}]
+
+msg = client.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=512,
+    tools=tools,
+    messages=[{"role": "user", "content": "What's the weather in Pune?"}],
+)
+
+if msg.stop_reason == "tool_use":
+    call = next(b for b in msg.content if b.type == "tool_use")
+    print(call.name, call.input)   # get_weather {'city': 'Pune'}
+    # → run your real get_weather(**call.input), then send the result
+    #   back as a tool_result message and call the API again.</pre></div>
+      <div class="call call--note"><div class="call__k">● Note</div><p>Asking for JSON works, but the model can still stray. For guaranteed-valid output, the API supports <strong>structured outputs</strong> (an <code>output_config.format</code> JSON schema) and <strong>strict tool use</strong>, which constrain the response to your schema. Reach for those once your parser starts throwing.</p></div>
+    </section>
+
+    <section id="l3">
+      <p class="eyebrow">Lesson 4.3</p>
+      <h2>Build a RAG pipeline</h2>
+      <p>A model only knows what's in its training data and your prompt. <strong>Retrieval-Augmented Generation (RAG)</strong> lets it answer from <em>your</em> documents by fetching the relevant bits and pasting them into the prompt. Five steps:</p>
+      <ol>
+        <li><strong>Chunk</strong> your documents into small passages.</li>
+        <li><strong>Embed</strong> each chunk into a vector (a list of numbers that captures meaning).</li>
+        <li><strong>Store</strong> the vectors in a vector database.</li>
+        <li><strong>Retrieve</strong> the top-k chunks most similar to the question.</li>
+        <li><strong>Augment</strong> the prompt with those chunks and ask Claude.</li>
+      </ol>
+      <p>Here's the whole thing, small enough to read in one sitting (uses a local embedding model so it runs with no extra keys):</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · rag.py</span><button class="code__copy">copy</button></div><pre>import anthropic, numpy as np
+from sentence_transformers import SentenceTransformer
+
+client = anthropic.Anthropic()
+embed = SentenceTransformer("all-MiniLM-L6-v2")   # local embedding model
+
+# 1. CHUNK — your docs, split into small passages
+docs = [
+    "Refunds are issued within 5 business days.",
+    "Our office is open Monday to Friday, 9am to 6pm.",
+    "Free shipping applies on orders over 2000 rupees.",
+]
+
+# 2. EMBED + 3. STORE — one vector per chunk (in prod: pgvector / Pinecone / FAISS)
+doc_vecs = embed.encode(docs)
+
+def answer(question: str) -> str:
+    # 4. RETRIEVE — top-2 chunks by cosine similarity
+    q = embed.encode([question])[0]
+    sims = doc_vecs @ q / (np.linalg.norm(doc_vecs, axis=1) * np.linalg.norm(q))
+    top = [docs[i] for i in sims.argsort()[-2:][::-1]]
+
+    # 5. AUGMENT — put the retrieved context in the prompt
+    context = "\n".join(f"- {c}" for c in top)
+    msg = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=512,
+        system="Answer ONLY from the context. If it's not there, say you don't know.",
+        messages=[{"role": "user",
+            "content": f"Context:\n{context}\n\nQuestion: {question}"}],
+    )
+    return msg.content[0].text
+
+print(answer("How long do refunds take?"))
+# → "Refunds are issued within 5 business days."</pre></div>
+      <div class="call call--insight"><div class="call__k">◆ Insight</div><p>The toy pieces have production homes. For embeddings, Anthropic recommends <strong>Voyage AI</strong> (a hosted embedding model) over a local one for quality. For storage, use a real <strong>vector DB</strong> — <strong>pgvector</strong> if you already run Postgres, <strong>Pinecone</strong> for a managed service, or <strong>FAISS</strong> for an in-process index. The five steps stay identical; only the chunk store and embedder change.</p></div>
+    </section>
+
+    <section id="l4">
+      <p class="eyebrow">Lesson 4.4</p>
+      <h2>Deploy on a hyperscaler</h2>
+      <p>Your service runs on your laptop; now put it on a URL. The simplest path for a small API is to <strong>containerize</strong> it and ship to a serverless container platform like <strong>Google Cloud Run</strong> (or package it as an <strong>AWS Lambda</strong>). A minimal Dockerfile:</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">Dockerfile</span><button class="code__copy">copy</button></div><pre>FROM python:3.12-slim
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . .
+# Cloud Run routes traffic to $PORT (defaults to 8080)
+CMD ["sh", "-c", "uvicorn server:app --host 0.0.0.0 --port ${PORT:-8080}"]</pre></div>
+      <p>Deploy it — and keep the key in <strong>Secret Manager</strong>, injected as an environment variable at runtime, never baked into the image:</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">deploy · Cloud Run</span><button class="code__copy">copy</button></div><pre># one command builds, pushes and deploys from source
+gcloud run deploy rag-api \
+  --source . \
+  --region asia-south1 \
+  --set-secrets ANTHROPIC_API_KEY=anthropic-key:latest \
+  --allow-unauthenticated
+
+# → Service URL: https://rag-api-xxxxx.a.run.app  (your public backend)</pre></div>
+      <div class="call call--note"><div class="call__k">● Note</div><p>If your org already lives on a hyperscaler, you can reach Claude <em>through</em> it instead of the first-party API — <strong>Amazon Bedrock</strong> (the <code>AnthropicBedrockMantle</code> client) or <strong>Google Vertex AI</strong> (the <code>AnthropicVertex</code> client). Same <code>messages.create</code> surface; the difference is auth (IAM / ADC) and, on Bedrock, an <code>anthropic.</code> prefix on model IDs.</p></div>
+    </section>
+
+    <section id="l5">
+      <p class="eyebrow">Lesson 4.5</p>
+      <h2>Evals &amp; testing</h2>
+      <p>"It worked when I tried it" is not a test. Because model output varies, you check behaviour against a <strong>golden set</strong> — inputs paired with what a good answer must contain — and run it every time you change a prompt or model.</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · eval loop</span><button class="code__copy">copy</button></div><pre>import anthropic
+client = anthropic.Anthropic()
+
+# golden set: an input + something a correct answer must contain
+GOLDEN = [
+    {"q": "How long do refunds take?", "must_include": "5 business days"},
+    {"q": "When are you open?",        "must_include": "Monday to Friday"},
+]
+
+def run(q: str) -> str:            # your app under test
+    msg = client.messages.create(
+        model="claude-sonnet-4-6", max_tokens=256,
+        messages=[{"role": "user", "content": q}])
+    return msg.content[0].text
+
+passed = 0
+for case in GOLDEN:
+    out = run(case["q"])
+    ok = case["must_include"].lower() in out.lower()   # a simple assertion
+    passed += ok
+    print("PASS" if ok else "FAIL", "—", case["q"])
+print(f"{passed}/{len(GOLDEN)} passed")</pre></div>
+      <p>Substring checks only get you so far. For open-ended answers, use <strong>LLM-as-judge</strong>: a stronger model grades the output of your cheaper production model.</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · llm-as-judge</span><button class="code__copy">copy</button></div><pre>def judge(question: str, answer: str) -> str:
+    msg = client.messages.create(
+        model="claude-opus-4-8",       # a stronger model grades the cheaper one
+        max_tokens=10,
+        system="Reply with only PASS or FAIL.",
+        messages=[{"role": "user",
+            "content": f"Q: {question}\nA: {answer}\n"
+                       "Is the answer correct and helpful?"}])
+    return msg.content[0].text.strip()
+
+print(judge("When are you open?", run("When are you open?")))</pre></div>
+      <div class="call call--try"><div class="call__k">▸ Try it</div><p>Run your golden set against <code>claude-haiku-4-5-20251001</code> and again against <code>claude-sonnet-4-6</code>. Compare pass rates and latency. That table — quality vs speed vs cost — is exactly how you pick a production model instead of guessing.</p></div>
+    </section>
+
+    <section id="l6">
+      <p class="eyebrow">Lesson 4.6</p>
+      <h2>Guardrails, safety &amp; cost control</h2>
+      <p>A live endpoint takes untrusted input and spends real money. Two things wrap every model call: <strong>validation</strong> (reject bad or out-of-scope requests before they reach the model) and <strong>cost control</strong> (don't pay to think about things you shouldn't).</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · guard function</span><button class="code__copy">copy</button></div><pre>BLOCK = ("password", "credit card", "ssn")
+
+def guard(user_input: str) -> str | None:
+    """Return an error message if the request should be refused, else None."""
+    if len(user_input) > 4000:
+        return "Message too long — please shorten it."
+    if any(word in user_input.lower() for word in BLOCK):
+        return "Please don't share secrets like passwords or card numbers."
+    return None
+
+def ask(user_input: str) -> str:
+    err = guard(user_input)                 # input validation
+    if err:
+        return err
+    msg = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=512,                     # token budget: caps output cost
+        system="You only answer questions about our shipping policy. "
+               "Politely decline anything else.",   # refuse out-of-scope
+        messages=[{"role": "user", "content": user_input}],
+    )
+    return msg.content[0].text</pre></div>
+      <p>The biggest single lever on cost is <strong>prompt caching</strong>: mark a large, unchanging chunk of context (a policy doc, a system prompt) as cacheable and repeat calls reuse it far more cheaply.</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · prompt caching</span><button class="code__copy">copy</button></div><pre>msg = client.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=512,
+    system=[{
+        "type": "text",
+        "text": BIG_POLICY_DOCUMENT,             # long, stable context
+        "cache_control": {"type": "ephemeral"},  # cache it
+    }],
+    messages=[{"role": "user", "content": "What's the return window?"}],
+)
+print(msg.usage.cache_read_input_tokens)   # &gt; 0 means you hit the cache</pre></div>
+      <div class="call call--insight"><div class="call__k">◆ Insight</div><p>Cost is driven by <strong>tokens</strong>, split into <strong>input</strong> (what you send) and <strong>output</strong> (what the model writes) — and output tokens cost more than input. Three levers: send less (cache, trim history), write less (a tight <code>max_tokens</code>), and use a smaller model (Haiku &lt; Sonnet &lt; Opus) where quality allows. For current numbers see <a href="https://www.anthropic.com/pricing" target="_blank" rel="noopener">anthropic.com/pricing</a> and the <a href="https://docs.anthropic.com" target="_blank" rel="noopener">API docs</a>.</p></div>
+    </section>
+
+    <section id="l7">
+      <p class="eyebrow">Lesson 4.7</p>
+      <h2>Observability &amp; iterating in prod</h2>
+      <p>Once real users are hitting your endpoint, you need to see what they send, what the model returns, and what it cost — so you can debug failures and improve. Log a <strong>trace id</strong>, the token usage, and latency on every call.</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · logging &amp; tracing</span><button class="code__copy">copy</button></div><pre>import logging, uuid, time
+logging.basicConfig(level=logging.INFO)
+log = logging.getLogger("ai")
+
+def ask(user_input: str) -> dict:
+    trace_id = str(uuid.uuid4())
+    t0 = time.time()
+    msg = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=512,
+        messages=[{"role": "user", "content": user_input}],
+    )
+    answer = msg.content[0].text
+    log.info("trace=%s ms=%d in_tok=%d out_tok=%d",
+             trace_id, (time.time() - t0) * 1000,
+             msg.usage.input_tokens, msg.usage.output_tokens)
+    return {"trace_id": trace_id, "answer": answer}</pre></div>
+      <p>Then capture <strong>user feedback</strong> against that trace id and close the loop — every thumbs-down is a candidate for tomorrow's eval set.</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · closing the loop</span><button class="code__copy">copy</button></div><pre>def record_feedback(trace_id: str, helpful: bool):
+    db.save({"trace_id": trace_id, "helpful": helpful})
+    # Failing traces become new golden cases (Lesson 4.5),
+    # which drive the next round of prompt changes. That loop —
+    # ship → log → collect feedback → add evals → improve — is
+    # what turns a demo into a product that gets better over time.</pre></div>
+      <div class="call call--note"><div class="call__k">● Note</div><p>Store prompts and responses somewhere you can query them, but treat them as sensitive: redact secrets and personal data before logging, and check your privacy obligations before persisting user content. Observability should never become a second copy of data you promised to protect.</p></div>
+
+      <div style="margin-top:2.5rem;text-align:center">
+        <p style="color:var(--ink-soft)">That's the craft sheath. You can now build, ship, test and operate a real AI service end to end.</p>
+        <button class="btn btn--solid" data-complete data-level="4" data-lesson="course">Mark this course complete</button>
+      </div>
+    </section>
+
+    <!-- next steps -->
+    <div class="lnav">
+      <a href="capstone.html"><small>Now do the</small><span>🏛️ Level 4 Capstone — Ship a RAG-Powered Assistant</span></a>
+      <a class="next" href="../level-5/index.html"><small>When ready</small><span>Level 5 · Innovate — push the frontier →</span></a>
+    </div>
+  </article>
+
+  <!-- RIGHT REFS RAIL -->
+  <aside class="refs-rail" aria-label="References">
+    <p class="rail__title">Take it with you</p>
+    <a class="ref-card" href="reference.html"><b>🎒 Level 4 reference pack</b><span>API quickstart, checklist, glossary</span></a>
+    <a class="ref-card" href="capstone.html"><b>🏛️ Capstone brief</b><span>Ship a RAG-Powered Assistant</span></a>
+    <p class="rail__title" style="margin-top:1.5rem">Build with</p>
+    <a class="ref-card" href="https://docs.anthropic.com" target="_blank" rel="noopener"><b>Anthropic API docs <span class="ext">↗</span></b><span>docs.anthropic.com</span></a>
+    <a class="ref-card" href="https://console.anthropic.com" target="_blank" rel="noopener"><b>Get an API key <span class="ext">↗</span></b><span>console.anthropic.com</span></a>
+    <a class="ref-card" href="https://github.com/anthropics/anthropic-cookbook" target="_blank" rel="noopener"><b>Claude Cookbook <span class="ext">↗</span></b><span>Runnable recipes on GitHub</span></a>
+  </aside>
+</div>
+
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div>
+      <a class="brand" href="../index.html" style="margin-bottom:.8rem"><svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#e07a54" stroke-width="2"/><circle cx="16" cy="16" r="9.5" fill="none" stroke="#9b7be0" stroke-width="2"/><circle cx="16" cy="16" r="4.5" fill="#e8b84b"/></svg> Panchakosha AI</a>
+      <p style="max-width:34ch">Learn AI from the outside in.</p>
+    </div>
+    <div>
+      <h4>The five levels</h4>
+      <a href="../level-1/index.html">1 · Use</a>
+      <a href="../level-2/index.html">2 · Master</a>
+      <a href="../level-3/index.html">3 · Understand</a>
+      <a href="../level-4/index.html">4 · Build</a>
+      <a href="../level-5/index.html">5 · Innovate</a>
+    </div>
+    <div>
+      <h4>This course</h4>
+      <a href="index.html">Lessons</a>
+      <a href="capstone.html">Capstone</a>
+      <a href="reference.html">Reference pack</a>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:2rem;color:var(--ink-faint)">© <span data-year>2026</span> Panchakosha AI · Level 4 · Build.</div>
+</footer>
+
+<script src="../assets/js/kosha.js"></script>
+</body>

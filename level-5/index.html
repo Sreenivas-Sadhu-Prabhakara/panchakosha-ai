@@ -1,0 +1,428 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Level 5 · Innovate — ML, AI &amp; agents | Panchakosha AI</title>
+<meta name="description" content="Level 5 of Panchakosha AI: for engineers. From ML foundations and neural networks to embeddings, fine-tuning, alignment, and tool-using agents with the Claude API and MCP. Ends with a build-an-agent capstone and a reference pack.">
+<link rel="canonical" href="https://sreenivas-sadhu-prabhakara.github.io/panchakosha-ai/level-5/">
+<meta property="og:title" content="Level 5 · Innovate — ML, AI &amp; agents">
+<meta property="og:description" content="For engineers. ML, neural nets, embeddings, fine-tuning, alignment, and agents — with real Claude tool-use code. Capstone + reference pack included.">
+<meta property="og:url" content="https://sreenivas-sadhu-prabhakara.github.io/panchakosha-ai/level-5/">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23e07a54' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='9.5' fill='none' stroke='%239b7be0' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%23e8b84b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/kosha.css">
+
+<body class="l5">
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="../index.html">
+      <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#e07a54" stroke-width="2"/><circle cx="16" cy="16" r="9.5" fill="none" stroke="#9b7be0" stroke-width="2"/><circle cx="16" cy="16" r="4.5" fill="#e8b84b"/></svg>
+      Panchakosha&nbsp;AI
+    </a>
+    <button class="nav__toggle" aria-label="Menu" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav__links" id="navlinks">
+      <a href="../level-1/index.html">1 · Use</a>
+      <a href="../level-2/index.html">2 · Master</a>
+      <a href="../level-3/index.html">3 · Understand</a>
+      <a href="../level-4/index.html">4 · Build</a>
+      <a href="index.html" aria-current="page">5 · Innovate</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="crumb"><a href="../index.html">Home</a> → <span>Level 5 · Innovate</span></p>
+</div>
+
+<header class="wrap pagehead">
+  <p class="eyebrow">Level 5 · Anandamaya — the luminous core</p>
+  <h1 style="max-width:18ch">Innovate — ML, AI &amp;&nbsp;agents</h1>
+  <p class="lede">The innermost sheath — the luminous core where the whole path resolves. You've used, mastered, understood, and built <em>with</em> AI. Now you build the intelligence itself: from gradient descent to autonomous agents, this is how modern AI actually works, and how you make it.</p>
+  <div class="chips">
+    <span class="chip">🛠️ For <b>engineers</b></span>
+    <span class="chip">⏱️ <b>~8 hours</b>, hands-on</span>
+    <span class="chip">🧩 8 lessons</span>
+    <span class="chip">🏛️ 1 capstone</span>
+    <span class="chip">🎒 reference pack</span>
+  </div>
+  <div class="hero__cta">
+    <a class="btn btn--solid" href="#l0">Start lesson 5.0 <span class="btn__arrow">→</span></a>
+    <a class="btn btn--ghost" href="capstone.html">Preview the capstone</a>
+  </div>
+</header>
+
+<div class="wrap lesson">
+  <!-- LEFT RAIL -->
+  <aside class="rail" aria-label="Lessons in this course">
+    <p class="rail__title">This course</p>
+    <ol>
+      <li><a href="#l0">5.0 · ML foundations</a></li>
+      <li><a href="#l1">5.1 · Neural networks</a></li>
+      <li><a href="#l2">5.2 · Embeddings</a></li>
+      <li><a href="#l3">5.3 · Fine-tuning</a></li>
+      <li><a href="#l4">5.4 · Alignment</a></li>
+      <li><a href="#l5">5.5 · Agentic foundations</a></li>
+      <li><a href="#l6">5.6 · Tool use &amp; MCP</a></li>
+      <li><a href="#l7">5.7 · Multi-agent &amp; frontier</a></li>
+      <li><a href="capstone.html">🏛️ Capstone</a></li>
+      <li><a href="reference.html">🎒 Reference pack</a></li>
+    </ol>
+  </aside>
+
+  <!-- MAIN -->
+  <article class="prose">
+
+    <section id="l0">
+      <p class="eyebrow">Lesson 5.0</p>
+      <h2>ML foundations in one lesson</h2>
+      <p>Strip away the hype and machine learning is one idea: <strong>find parameters that minimize error</strong>. You don't write the rules — you write a model with tunable knobs, define how wrong it is, and let an optimizer turn the knobs until it's less wrong. Four moving parts:</p>
+      <ul>
+        <li><strong>Data</strong> — examples the model learns from. Often <em>(input, target)</em> pairs.</li>
+        <li><strong>Model</strong> — a function with parameters (weights) that maps input → prediction.</li>
+        <li><strong>Loss</strong> — a single number measuring how far predictions are from targets.</li>
+        <li><strong>Gradient descent</strong> — nudge each parameter in the direction that lowers the loss, repeat.</li>
+      </ul>
+      <p>The three classic problem shapes:</p>
+      <ul>
+        <li><strong>Supervised</strong> — labelled data; learn input → target (spam/not-spam, price prediction).</li>
+        <li><strong>Unsupervised</strong> — no labels; find structure (clustering, dimensionality reduction).</li>
+        <li><strong>Reinforcement</strong> — learn from rewards for actions in an environment (game-play, RLHF later in 5.4).</li>
+      </ul>
+      <p>Here is the entire loop — fit a line to points with nothing but NumPy. Watch <code>w</code> and <code>b</code> walk toward the true values:</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · gradient descent</span><button class="code__copy">copy</button></div><pre>import numpy as np
+
+# Model: y = w*x + b. We'll learn w and b. (True line: y = 2x + 1)
+X = np.array([1, 2, 3, 4])
+y = np.array([3, 5, 7, 9])
+
+w, b = 0.0, 0.0        # parameters, start at zero
+lr = 0.01              # learning rate: how big each step is
+
+for step in range(2000):
+    y_hat = w * X + b                 # forward pass: predict
+    error = y_hat - y                 # how wrong, per point
+    loss  = (error ** 2).mean()       # mean squared error
+
+    grad_w = (2 * error * X).mean()   # d(loss)/d(w)
+    grad_b = (2 * error).mean()       # d(loss)/d(b)
+
+    w -= lr * grad_w                  # step downhill
+    b -= lr * grad_b
+
+print(round(w, 2), round(b, 2))       # -> 2.0 1.0</pre></div>
+      <div class="call call--insight"><div class="call__k">◆ Insight</div><p>Everything else in this level is this loop at scale. A large language model is the same idea — a model, a loss, gradient descent — with billions of parameters instead of two, and "predict the next token" as the target. The mechanics don't change; only the size does.</p></div>
+    </section>
+
+    <section id="l1">
+      <p class="eyebrow">Lesson 5.1</p>
+      <h2>Neural networks &amp; deep learning</h2>
+      <p>A <strong>neuron</strong> is just a weighted sum of its inputs plus a bias, passed through a non-linear <strong>activation</strong> (like ReLU: <code>max(0, x)</code>). Stack neurons into a <strong>layer</strong>, stack layers into a <strong>network</strong>. The <strong>forward pass</strong> runs data through the layers to a prediction; the loss says how wrong it was.</p>
+      <p>The learning happens via <strong>backpropagation</strong>: the chain rule computes, for every weight in the network, how much it contributed to the loss — its gradient. Then it's the same gradient descent from 5.0: nudge each weight downhill. That's the whole trick. "Deep" just means many layers.</p>
+      <p>Why did this suddenly work after decades of theory? Three things arrived together: <strong>data</strong> (the internet), <strong>compute</strong> (GPUs), and <strong>scale</strong> (bigger models keep getting better). None alone was enough.</p>
+      <p>The same network as before, now in PyTorch — note it's still forward → loss → backward → step:</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · pytorch</span><button class="code__copy">copy</button></div><pre>import torch
+import torch.nn as nn
+
+# 784 pixels in -> 128 hidden -> 10 class scores out
+model = nn.Sequential(
+    nn.Linear(784, 128),   # weights + biases (the learned parameters)
+    nn.ReLU(),             # activation: adds non-linearity
+    nn.Linear(128, 10),
+)
+
+loss_fn   = nn.CrossEntropyLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=1e-3)
+
+for x, target in training_batches:   # x: images, target: labels
+    pred = model(x)                  # forward pass
+    loss = loss_fn(pred, target)
+
+    optimizer.zero_grad()
+    loss.backward()                  # backprop: gradient for every weight
+    optimizer.step()                 # gradient descent: update the weights</pre></div>
+      <div class="call call--note"><div class="call__k">● Note</div><p>You rarely write <code>loss.backward()</code>'s math by hand — frameworks like PyTorch build a computation graph and differentiate it automatically (<em>autograd</em>). Your job is to design the model, pick the loss, and feed it good data. The optimizer does the calculus.</p></div>
+    </section>
+
+    <section id="l2">
+      <p class="eyebrow">Lesson 5.2</p>
+      <h2>Embeddings &amp; vector space</h2>
+      <p>An <strong>embedding</strong> turns a piece of content — a word, a sentence, an image — into a list of numbers (a vector) such that <em>meaning becomes geometry</em>. Things that mean similar things land close together in the vector space; unrelated things land far apart. This is the representation modern AI thinks in.</p>
+      <p>"Close" is measured with <strong>cosine similarity</strong> — the angle between two vectors, from 1 (identical direction) to −1 (opposite). Once meaning is geometry, three big capabilities fall out for free:</p>
+      <ul>
+        <li><strong>Semantic search</strong> — embed the query, return the nearest documents (matches meaning, not keywords).</li>
+        <li><strong>Clustering</strong> — group vectors that huddle together to find topics or duplicates.</li>
+        <li><strong>RAG</strong> (retrieval-augmented generation) — embed a knowledge base, retrieve the passages nearest the question, and hand them to an LLM as context. This is how you ground a model in <em>your</em> data.</li>
+      </ul>
+      <p>See it directly — two ways of saying the same thing score high; an unrelated sentence scores low:</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · embeddings</span><button class="code__copy">copy</button></div><pre>from sentence_transformers import SentenceTransformer
+import numpy as np
+
+model = SentenceTransformer("all-MiniLM-L6-v2")   # text -> 384-dim vectors
+
+docs = [
+    "the cat sat on the mat",
+    "a feline rested on the rug",
+    "quarterly revenue rose 12 percent",
+]
+vecs = model.encode(docs)                          # shape (3, 384)
+
+def cosine(a, b):
+    return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
+
+print(round(cosine(vecs[0], vecs[1]), 2))   # ~0.7  same meaning, different words
+print(round(cosine(vecs[0], vecs[2]), 2))   # ~0.05 unrelated</pre></div>
+      <div class="call call--insight"><div class="call__k">◆ Insight</div><p>A vector database (FAISS, pgvector, Pinecone) is just this at scale: store millions of embeddings, find the nearest <em>k</em> in milliseconds. RAG isn't magic — it's a nearest-neighbour lookup feeding a prompt. Understanding that demystifies most "chat with your docs" products.</p></div>
+    </section>
+
+    <section id="l3">
+      <p class="eyebrow">Lesson 5.3</p>
+      <h2>Fine-tuning &amp; adaptation</h2>
+      <p><strong>Fine-tuning</strong> continues training a pretrained model on your own data so it internalizes a style, format, or domain. Two flavours:</p>
+      <ul>
+        <li><strong>Full fine-tuning</strong> — update <em>every</em> weight. Powerful, but expensive: you need a lot of data, GPUs, and you get a whole new multi-gigabyte model to host.</li>
+        <li><strong>Parameter-efficient fine-tuning (PEFT)</strong> — freeze the base model and train tiny add-on matrices. <strong>LoRA</strong> is the popular one: it injects small low-rank updates into a few layers, training well under 1% of the parameters. Cheap, fast, and you can swap adapters like plugins.</li>
+      </ul>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · lora / peft</span><button class="code__copy">copy</button></div><pre>from peft import LoraConfig, get_peft_model
+from transformers import AutoModelForCausalLM
+
+base = AutoModelForCausalLM.from_pretrained("meta-llama/Llama-3.1-8B")
+
+lora = LoraConfig(
+    r=16,                                  # rank of the low-rank update
+    lora_alpha=32,
+    target_modules=["q_proj", "v_proj"],   # adapt the attention projections
+    lora_dropout=0.05,
+    task_type="CAUSAL_LM",
+)
+
+model = get_peft_model(base, lora)
+model.print_trainable_parameters()         # e.g. ~0.06% of params trainable</pre></div>
+      <p>But the most important skill here is knowing <em>when not to</em>. The decision order, cheapest and fastest first:</p>
+      <ol>
+        <li><strong>Prompt first.</strong> Better instructions, examples, and a system prompt solve a surprising amount — with zero training and instant iteration.</li>
+        <li><strong>RAG next.</strong> If the problem is "the model doesn't know my facts," retrieve them (5.2). Facts change; retraining to teach facts is the wrong tool.</li>
+        <li><strong>Fine-tune last.</strong> Reach for it when you need a consistent <em>behaviour, tone, or format</em> that prompting can't hold, and you have quality labelled data. It teaches <em>skills and style</em>, not fresh facts.</li>
+      </ol>
+      <div class="call call--warn"><div class="call__k">▲ Careful</div><p>Fine-tuning is the answer people reach for too early. It bakes knowledge in at training time, so it goes stale, costs money to redo, and can't cite a source. If your real need is "know the latest" or "know my private data," that's RAG. Prove prompting and RAG can't do it <em>before</em> you spin up a training run.</p></div>
+    </section>
+
+    <section id="l4">
+      <p class="eyebrow">Lesson 5.4</p>
+      <h2>Alignment: shaping helpful, honest, harmless models</h2>
+      <p>A model that has only been trained to predict the next token is a brilliant <em>autocomplete</em> — not an assistant. It has no notion of being helpful, telling the truth, or refusing harm. <strong>Alignment</strong> is the set of techniques that shape a raw pretrained model into something that behaves the way we want.</p>
+      <p>The pipeline, conceptually:</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">the alignment pipeline</span><button class="code__copy">copy</button></div><pre>1. PRETRAIN     predict-next-token on a huge corpus
+                -> a model that *completes* text
+
+2. SFT          supervised fine-tune on curated (prompt, good-answer) pairs
+                -> a model that *follows instructions*
+
+3. PREFERENCES  collect comparisons: for one prompt, "answer A is better than B"
+
+4a. RLHF        train a reward model on those preferences, then use RL (PPO)
+                to push the policy toward answers the reward model scores high
+
+4b. DPO         Direct Preference Optimization: skip the separate reward model,
+                optimize the policy directly on the preference pairs
+                (simpler and widely used)
+
+Constitutional AI (Anthropic's approach): the model critiques and revises its
+own answers against a written set of principles (a "constitution"). Much of the
+feedback is AI-generated (RLAIF) rather than needing a human label per example.</pre></div>
+      <p>The through-line: after pretraining teaches raw capability and SFT teaches instruction-following, we steer <em>values</em> with human (or AI) preferences. <strong>RLHF</strong> learns a reward model from those preferences and optimizes against it. <strong>DPO</strong> reaches a similar place without the separate reward model, straight from the preference pairs. <strong>Constitutional AI</strong> — Anthropic's method — has the model use an explicit set of written principles to critique and improve its own responses, so the preference signal can be generated at scale by the model itself.</p>
+      <div class="call call--note"><div class="call__k">● Note</div><p>Alignment is why a well-trained model refuses harmful requests, hedges when unsure, and doesn't just parrot the most likely continuation. It's a genuinely open research area — "helpful, honest, and harmless" is easy to say and hard to fully specify. Treat any single technique as a current best effort, not a solved problem.</p></div>
+    </section>
+
+    <section id="l5">
+      <p class="eyebrow">Lesson 5.5</p>
+      <h2>Agentic AI foundations</h2>
+      <p>A chatbot answers a message. An <strong>agent</strong> pursues a goal — it can take actions, observe the results, and decide what to do next, in a loop, until the goal is met. Four capabilities separate the two:</p>
+      <ul>
+        <li><strong>Perception</strong> — read the goal, the conversation, and tool results (its view of the world).</li>
+        <li><strong>Planning</strong> — reason about what to do next.</li>
+        <li><strong>Tool use</strong> — call functions, APIs, code, or other agents to actually <em>do</em> things.</li>
+        <li><strong>Memory</strong> — carry state across steps (the running transcript, a scratchpad, or a store).</li>
+      </ul>
+      <p>Tying them together is a <strong>control loop</strong>. The dominant pattern is <strong>ReAct</strong> — <em>reason → act → observe → repeat</em>: the model reasons about the next step, acts by calling a tool, observes the result, and loops with that new information until it's done.</p>
+      <p>Here's a real ReAct loop against the Claude API. The model reasons and asks for a tool; you run it and feed the result back; it continues until it stops requesting tools:</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · claude agent loop</span><button class="code__copy">copy</button></div><pre>import anthropic
+
+client = anthropic.Anthropic()
+
+# REASON (Claude thinks) -> ACT (asks for a tool)
+# -> OBSERVE (you run it) -> repeat, until it stops asking for tools.
+messages = [{
+    "role": "user",
+    "content": "What's the weather in Paris, and should I take an umbrella?",
+}]
+
+while True:
+    response = client.messages.create(
+        model="claude-sonnet-4-6",
+        max_tokens=1024,
+        tools=tools,                 # tool definitions from 5.6
+        messages=messages,
+    )
+    messages.append({"role": "assistant", "content": response.content})
+
+    if response.stop_reason != "tool_use":
+        break                        # Claude gave a final answer -> done
+
+    # ACT + OBSERVE: run each requested tool, feed results back in one turn
+    results = []
+    for block in response.content:
+        if block.type == "tool_use":
+            output = run_tool(block.name, block.input)   # your code
+            results.append({
+                "type": "tool_result",
+                "tool_use_id": block.id,
+                "content": output,
+            })
+    messages.append({"role": "user", "content": results})
+
+print(next(b.text for b in response.content if b.type == "text"))</pre></div>
+      <div class="call call--insight"><div class="call__k">◆ Insight</div><p>Notice the loop is <em>your</em> code, not the model's. The LLM is a reasoning engine that emits "I want to call tool X with these arguments"; your harness decides what tools exist, executes them, and controls the loop — including when to stop. That separation is the whole architecture of an agent.</p></div>
+    </section>
+
+    <section id="l6">
+      <p class="eyebrow">Lesson 5.6</p>
+      <h2>Tool use &amp; the Model Context Protocol</h2>
+      <p><strong>Tool use</strong> (function calling) is how a model reaches beyond text. You describe your tools as JSON Schema; the model, when it decides a tool would help, returns a structured request for it. It never runs anything — it just <em>asks</em>, and your code decides whether and how to execute.</p>
+      <p>Each tool is <code>{name, description, input_schema}</code>. Send them with your message; a good description is what teaches the model when to reach for the tool:</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · defining a tool</span><button class="code__copy">copy</button></div><pre>import anthropic
+
+client = anthropic.Anthropic()
+
+# 1. Describe the tool: name, description, and a JSON Schema for its input.
+tools = [{
+    "name": "get_weather",
+    "description": "Get the current weather for a city. "
+                   "Use this whenever the user asks about weather.",
+    "input_schema": {
+        "type": "object",
+        "properties": {
+            "city": {"type": "string", "description": "City name, e.g. Paris"},
+        },
+        "required": ["city"],
+    },
+}]
+
+def run_tool(name, args):
+    if name == "get_weather":
+        # call a real weather API here; hard-coded for the example
+        return f"18C, light rain in {args['city']}"
+    raise ValueError(name)
+
+# 2. One turn. If Claude wants the tool, stop_reason == "tool_use".
+response = client.messages.create(
+    model="claude-sonnet-4-6",
+    max_tokens=1024,
+    tools=tools,
+    messages=[{"role": "user", "content": "What's the weather in Paris?"}],
+)
+
+for block in response.content:
+    if block.type == "tool_use":
+        print(block.name, block.input)   # -> get_weather {'city': 'Paris'}</pre></div>
+      <p>Wrap that in the loop from 5.5 and you have a working agent. But notice the friction: every tool is a bespoke integration you write and maintain. That's the problem the <strong>Model Context Protocol (MCP)</strong> solves.</p>
+      <p>MCP is an <strong>open standard</strong> (introduced by Anthropic) for connecting AI applications to tools, data, and services. Instead of hand-coding each integration per app, a capability is exposed once as an <strong>MCP server</strong>; any MCP-compatible client — Claude, an IDE, your own agent — can discover and call it. Think of it as a universal port for agents: write the connector once, plug in anywhere.</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">json · mcp server config</span><button class="code__copy">copy</button></div><pre>{
+  "mcpServers": {
+    "filesystem": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-filesystem", "/data"]
+    },
+    "github": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-github"]
+    }
+  }
+}</pre></div>
+      <div class="call call--try"><div class="call__k">▸ Try it</div><p>Point an MCP-aware client at a prebuilt server (filesystem, GitHub, a database) and ask the model to use it — no glue code. Then read the spec at <a href="https://modelcontextprotocol.io" target="_blank" rel="noopener">modelcontextprotocol.io <span class="ext">↗</span></a> and picture wrapping one of <em>your</em> internal services as a server. That's the leap from a one-off tool to a reusable capability.</p></div>
+    </section>
+
+    <section id="l7">
+      <p class="eyebrow">Lesson 5.7</p>
+      <h2>Multi-agent systems &amp; the frontier</h2>
+      <p>One agent has one context window and one line of attention. For big, decomposable jobs, a <strong>multi-agent system</strong> can do better: several specialized agents, each with its own role, tools, and prompt, coordinated toward a shared goal.</p>
+      <ul>
+        <li><strong>Roles</strong> — a researcher, a coder, a writer, a critic; each tuned for its job.</li>
+        <li><strong>Hand-offs</strong> — one agent's output becomes another's input.</li>
+        <li><strong>A coordinator</strong> — an orchestrator that decomposes the task, dispatches sub-tasks, and synthesizes the results.</li>
+      </ul>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · coordinator pattern</span><button class="code__copy">copy</button></div><pre># A coordinator delegates sub-tasks to specialists, then combines results.
+def coordinator(task):
+    plan = llm(f"Break this into independent sub-tasks:\n{task}")   # decompose
+
+    results = []
+    for subtask in plan.subtasks:
+        agent = pick_specialist(subtask)     # "researcher" | "coder" | "writer"
+        results.append(agent.run(subtask))   # each runs its own tool-use loop
+
+    return llm(f"Combine into one final answer:\n{results}")        # synthesize</pre></div>
+      <p>More autonomy means more ways to fail, so <strong>evaluation</strong> stops being optional. You can't eyeball reliability — you measure it: run the agent on a fixed set of inputs and score each result against a success criterion.</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">python · reliability eval</span><button class="code__copy">copy</button></div><pre># Run the agent on labelled cases and compute a success rate.
+cases  = load_test_cases()          # list of (input, checker) pairs
+passed = 0
+
+for case in cases:
+    output = agent.run(case.input)
+    if case.checker(output):        # did it meet the criterion?
+        passed += 1
+
+print(f"success rate: {passed}/{len(cases)} = {passed / len(cases):.0%}")</pre></div>
+      <p>This is the frontier, and it demands care. Autonomous systems that take real actions can fail in compounding ways, so <strong>safety and oversight</strong> are engineering requirements, not afterthoughts: keep a human in the loop for consequential actions, scope each tool's permissions tightly, log every step for audit, and set hard limits (max iterations, cost caps) so a loop can't run away.</p>
+      <div class="call call--warn"><div class="call__k">▲ Careful</div><p>Capability and control scale together. An agent that can send email, spend money, or run code can do so wrongly at machine speed. Build the guardrails <em>before</em> you widen the autonomy: confirmations on irreversible actions, least-privilege tools, and reliability numbers you actually trust. Responsible frontier work is measured, gated, and observable — not "ship it and hope."</p></div>
+
+      <div style="margin-top:2.5rem;text-align:center">
+        <p style="color:var(--ink-soft)">That's the core. From gradient descent to governed, tool-using agents — you now understand how modern AI is built, and how to build with it responsibly.</p>
+        <button class="btn btn--solid" data-complete data-level="5" data-lesson="course">Mark this course complete</button>
+      </div>
+    </section>
+
+    <!-- next steps -->
+    <div class="lnav">
+      <a href="capstone.html"><small>Now do the</small><span>🏛️ Level 5 Capstone — Build an agent</span></a>
+      <a class="next" href="../index.html"><small>You've reached the core</small><span>Return to the surface →</span></a>
+    </div>
+  </article>
+
+  <!-- RIGHT REFS RAIL -->
+  <aside class="refs-rail" aria-label="References">
+    <p class="rail__title">Take it with you</p>
+    <a class="ref-card" href="reference.html"><b>🎒 Level 5 reference pack</b><span>Agent diagram, decision table, glossary, links</span></a>
+    <a class="ref-card" href="capstone.html"><b>🏛️ Capstone brief</b><span>Build a tool-using agent</span></a>
+    <p class="rail__title" style="margin-top:1.5rem">Build with</p>
+    <a class="ref-card" href="https://docs.anthropic.com/en/docs/build-with-claude/tool-use" target="_blank" rel="noopener"><b>Claude tool use <span class="ext">↗</span></b><span>Anthropic docs</span></a>
+    <a class="ref-card" href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener"><b>Building effective agents <span class="ext">↗</span></b><span>Anthropic engineering</span></a>
+    <a class="ref-card" href="https://modelcontextprotocol.io" target="_blank" rel="noopener"><b>Model Context Protocol <span class="ext">↗</span></b><span>modelcontextprotocol.io</span></a>
+    <a class="ref-card" href="https://karpathy.ai/zero-to-hero.html" target="_blank" rel="noopener"><b>Neural Networks: Zero to Hero <span class="ext">↗</span></b><span>Andrej Karpathy</span></a>
+  </aside>
+</div>
+
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div>
+      <a class="brand" href="../index.html" style="margin-bottom:.8rem"><svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#e07a54" stroke-width="2"/><circle cx="16" cy="16" r="9.5" fill="none" stroke="#9b7be0" stroke-width="2"/><circle cx="16" cy="16" r="4.5" fill="#e8b84b"/></svg> Panchakosha AI</a>
+      <p style="max-width:34ch">Learn AI from the outside in.</p>
+    </div>
+    <div>
+      <h4>The five levels</h4>
+      <a href="../level-1/index.html">1 · Use</a>
+      <a href="../level-2/index.html">2 · Master</a>
+      <a href="../level-3/index.html">3 · Understand</a>
+      <a href="../level-4/index.html">4 · Build</a>
+      <a href="../level-5/index.html">5 · Innovate</a>
+    </div>
+    <div>
+      <h4>This course</h4>
+      <a href="index.html">Lessons</a>
+      <a href="capstone.html">Capstone</a>
+      <a href="reference.html">Reference pack</a>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:2rem;color:var(--ink-faint)">© <span data-year>2026</span> Panchakosha AI · Level 5 · Innovate.</div>
+</footer>
+
+<script src="../assets/js/kosha.js"></script>
+</body>

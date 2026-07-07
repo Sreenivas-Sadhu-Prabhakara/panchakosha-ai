@@ -1,0 +1,105 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Level 3 Reference Pack | Panchakosha AI</title>
+<meta name="description" content="The Level 3 reference pack: a concept map of the LLM pipeline, a plain-English glossary (token, embedding, transformer, attention, context window, temperature, RLHF, hallucination, RAG and more), quick mental models for how models behave, and curated links to keep learning.">
+<link rel="canonical" href="https://sreenivas-sadhu-prabhakara.github.io/panchakosha-ai/level-3/reference.html">
+<meta property="og:title" content="Level 3 Reference Pack — how LLMs work">
+<meta property="og:description" content="Concept map, plain-English glossary, mental models, and curated links — the whole Level 3 mental model of how LLMs work on one page.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23e07a54' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='9.5' fill='none' stroke='%239b7be0' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%23e8b84b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/kosha.css">
+
+<body class="l3">
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="../index.html"><svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#e07a54" stroke-width="2"/><circle cx="16" cy="16" r="9.5" fill="none" stroke="#9b7be0" stroke-width="2"/><circle cx="16" cy="16" r="4.5" fill="#e8b84b"/></svg> Panchakosha&nbsp;AI</a>
+    <button class="nav__toggle" aria-label="Menu" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav__links" id="navlinks">
+      <a href="../level-1/index.html">1 · Use</a>
+      <a href="../level-2/index.html">2 · Master</a>
+      <a href="index.html">3 · Understand</a>
+      <a href="../level-4/index.html">4 · Build</a>
+      <a href="../level-5/index.html">5 · Innovate</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap"><p class="crumb"><a href="../index.html">Home</a> → <a href="index.html">Level 3</a> → <span>Reference pack</span></p></div>
+
+<main class="wrap section" style="max-width:900px">
+  <p class="eyebrow">🎒 Level 3 · take it with you</p>
+  <h1>Reference pack</h1>
+  <p class="lede">The whole mental model of how an LLM works, on one page — bookmark it and come back whenever the machinery gets fuzzy.</p>
+
+  <!-- CONCEPT MAP -->
+  <h2 style="margin-top:2.5rem">The concept map</h2>
+  <div class="panel">
+    <p style="margin-top:0">One sentence: <strong>split → number → weigh → predict → sample → repeat.</strong> Here it is as a pipeline:</p>
+    <div class="code" style="margin-bottom:0"><div class="code__bar"><span class="code__tag">text → reply</span><button class="code__copy">copy</button></div><pre>text
+  └▶ tokens            sub-word chunks the model reads in
+      └▶ embeddings     each token becomes numbers that carry meaning
+          └▶ transformer    attention weighs which tokens matter for what's next
+              └▶ next-token probabilities
+                  └▶ sample one       temperature = how random the pick is
+                      └▶ append &amp; repeat   ──▶   the reply, one token at a time</pre></div>
+  </div>
+  <p style="color:var(--ink-mute)">Everything downstream follows from the last line: the model builds its answer <strong>one predicted token at a time</strong> — it never pauses to look a fact up.</p>
+
+  <!-- GLOSSARY -->
+  <h2 style="margin-top:2.5rem">Plain-English glossary</h2>
+  <div class="panel">
+    <dl style="margin:0;display:grid;gap:.9rem">
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Token</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">A sub-word chunk of text — the unit a model reads and writes in (≈ ¾ of an English word).</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Embedding</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">A token (or piece of text) turned into a list of numbers that captures its meaning and context.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Vector</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">An ordered list of numbers. Embeddings are vectors, and "closeness" between them stands in for similar meaning.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Parameter / weights</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">The billions of adjustable numbers inside a model that training tunes; together they hold what it "learned."</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Transformer</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">The neural-network architecture behind modern LLMs, built around attention and able to process all tokens in parallel.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Attention</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">The mechanism that lets the model weigh which earlier tokens matter most when predicting the next one.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Context window</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">The fixed amount of text (measured in tokens) a model can consider at once: prompt, history and attachments combined.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Knowledge cutoff</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">The date after which a model wasn't trained on any text — so on its own it can't know later events.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Temperature</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">A setting for how random the next-token choice is: low = focused and repetitive, high = varied and creative.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Sampling</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">Choosing the next token from the model's probability spread rather than always taking the single most likely one.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Pretraining</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">The first, largest training stage: predicting the next token across a huge body of text to build a base model.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Fine-tuning</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">Further training on smaller, curated examples to specialise a base model or teach it to follow instructions.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">RLHF</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">Reinforcement Learning from Human Feedback — using human preferences between answers to shape a model's behaviour, tone and safety.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Hallucination</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">A confident, fluent statement that is factually wrong — produced because the model generates plausible text rather than looking facts up.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">RAG</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">Retrieval-Augmented Generation — fetching relevant source text and adding it to the context so the model answers from real documents.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Quantization</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">Compressing a model's numbers to lower precision so it runs faster and smaller, usually at a small cost in quality.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Inference</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">Running a trained model to produce output (as opposed to training it). Every message you send is one inference.</dd></div>
+    </dl>
+  </div>
+
+  <!-- MENTAL MODELS -->
+  <h2 style="margin-top:2.5rem">Six mental models</h2>
+  <div class="grid grid--3">
+    <div class="panel"><b>It predicts, it doesn't look up</b><p style="color:var(--ink-mute);margin:.3rem 0 0">Every answer is generated token by token, not retrieved from a store of facts.</p></div>
+    <div class="panel"><b>Context is short-term memory</b><p style="color:var(--ink-mute);margin:.3rem 0 0">If it isn't in the window, the model can't see it. The transcript <em>is</em> the memory.</p></div>
+    <div class="panel"><b>Confidence ≠ correctness</b><p style="color:var(--ink-mute);margin:.3rem 0 0">Fluent and sure-sounding says nothing about true. Verify what matters.</p></div>
+    <div class="panel"><b>Bigger isn't always better</b><p style="color:var(--ink-mute);margin:.3rem 0 0">Match model size to the task; small + fast often wins on cost and speed.</p></div>
+    <div class="panel"><b>Ground it to trust it</b><p style="color:var(--ink-mute);margin:.3rem 0 0">Feed real source text (RAG) when facts matter, and ask it to answer only from that.</p></div>
+    <div class="panel"><b>Randomness is a dial</b><p style="color:var(--ink-mute);margin:.3rem 0 0">Temperature trades consistency for creativity — turn it down for facts, up for ideas.</p></div>
+  </div>
+
+  <!-- LINKS -->
+  <h2 style="margin-top:2.5rem">Curated links</h2>
+  <div class="take">
+    <a class="ref-card" href="https://www.3blue1brown.com/topics/neural-networks" target="_blank" rel="noopener"><b>3Blue1Brown — Neural networks <span class="ext">↗</span></b><span>Visual, intuitive neural-net &amp; transformer series</span></a>
+    <a class="ref-card" href="https://jalammar.github.io/illustrated-transformer/" target="_blank" rel="noopener"><b>The Illustrated Transformer <span class="ext">↗</span></b><span>Jay Alammar's picture-first walkthrough</span></a>
+    <a class="ref-card" href="https://www.anthropic.com/research" target="_blank" rel="noopener"><b>Anthropic — Research <span class="ext">↗</span></b><span>How models work &amp; interpretability</span></a>
+    <a class="ref-card" href="https://docs.anthropic.com" target="_blank" rel="noopener"><b>Anthropic — Docs <span class="ext">↗</span></b><span>Build with Claude: models, tokens, context</span></a>
+    <a class="ref-card" href="index.html"><b>← Back to Level 3</b><span>Re-read any lesson</span></a>
+  </div>
+
+  <div class="lnav">
+    <a href="capstone.html"><small>Do the</small><span>← Level 3 capstone</span></a>
+    <a class="next" href="../level-4/index.html"><small>Next sheath</small><span>Level 4 · Build →</span></a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap" style="color:var(--ink-faint)">© <span data-year>2026</span> Panchakosha AI · Level 3 reference · <a href="../index.html">Home</a></div>
+</footer>
+<script src="../assets/js/kosha.js"></script>
+</body>

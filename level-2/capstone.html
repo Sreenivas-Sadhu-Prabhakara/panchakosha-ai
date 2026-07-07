@@ -1,0 +1,95 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Level 2 Capstone · Automate a Real Workflow | Panchakosha AI</title>
+<meta name="description" content="The Level 2 capstone: pick one recurring work task, build a reusable Project with a saved system prompt and prompt library, wire one automation, and measure the time you saved. Includes a brief, starter prompts, and success criteria.">
+<link rel="canonical" href="https://sreenivas-sadhu-prabhakara.github.io/panchakosha-ai/level-2/capstone.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23e07a54' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='9.5' fill='none' stroke='%239b7be0' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%23e8b84b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/kosha.css">
+
+<body class="l2">
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="../index.html"><svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#e07a54" stroke-width="2"/><circle cx="16" cy="16" r="9.5" fill="none" stroke="#9b7be0" stroke-width="2"/><circle cx="16" cy="16" r="4.5" fill="#e8b84b"/></svg> Panchakosha&nbsp;AI</a>
+    <button class="nav__toggle" aria-label="Menu" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav__links" id="navlinks">
+      <a href="../level-1/index.html">1 · Use</a>
+      <a href="index.html">2 · Master</a>
+      <a href="../level-3/index.html">3 · Understand</a>
+      <a href="../level-4/index.html">4 · Build</a>
+      <a href="../level-5/index.html">5 · Innovate</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap"><p class="crumb"><a href="../index.html">Home</a> → <a href="index.html">Level 2</a> → <span>Capstone</span></p></div>
+
+<main class="wrap section" style="max-width:820px">
+  <p class="capstone__tag">🏛️ Level 2 Capstone</p>
+  <h1 style="margin-top:.4rem">Automate a Real Workflow</h1>
+  <p class="lede">Prove you can turn a chat habit into a work system. Pick one task you actually do every week, build it a reusable assistant, wire a single automation, and measure the time you get back.</p>
+
+  <div class="capstone" style="margin:2rem 0">
+    <h3 style="margin-top:0">The goal</h3>
+    <p style="margin-bottom:0">Choose <strong>one recurring work task</strong> and, over a week, turn it into a reusable setup: a <strong>Project (or custom GPT / Gem)</strong> with a saved <strong>system prompt</strong>, a small <strong>prompt library</strong> of the variations you use, and <strong>one automation</strong> that removes a manual step. Then <strong>measure the time saved</strong>. You'll exercise every Level 2 skill — advanced prompting, reusable context, and connecting tools — on something real.</p>
+  </div>
+
+  <h2>The four steps</h2>
+
+  <h3>① Pick the task &amp; baseline it</h3>
+  <p>Choose something recurring, context-heavy, and shape-stable (weekly report, standard replies, meeting notes, lead follow-ups). Before automating anything, time yourself doing it the old way — that's your baseline.</p>
+  <div class="code"><div class="code__bar"><span class="code__tag">starter</span><button class="code__copy">copy</button></div><pre>Here are 5 recurring tasks in my work week: [list]. For each, rate fit for a
+reusable AI setup (1-5) and estimate minutes it takes me now. Recommend the
+ONE with the best time-saved-to-effort ratio, and say why.</pre></div>
+
+  <h3>② Build the reusable assistant</h3>
+  <p>Create a Project (or custom GPT / Gem) and give it a real system prompt — role, audience, format, voice, and rules for missing information. Add a reference file if the task needs one.</p>
+  <div class="code"><div class="code__bar"><span class="code__tag">starter · system prompt</span><button class="code__copy">copy</button></div><pre>ROLE: You are my assistant for [the task].
+AUDIENCE: [who reads the output].
+FORMAT: [exact shape — headers, table, length].
+VOICE: [tone]. Never inflate; be honest about what's unfinished.
+RULES:
+- Turn my raw notes into the format above.
+- If a required detail is missing, ask ONE question, then wait.
+- Never invent facts, names, or numbers I didn't provide.</pre></div>
+
+  <h3>③ Assemble a small prompt library</h3>
+  <p>Save 3–5 reusable prompts for the variations you actually hit — the short version, the escalation, the "make it formal", the follow-up. Keep them in the Project or a note so future-you just picks one.</p>
+  <div class="code"><div class="code__bar"><span class="code__tag">starter</span><button class="code__copy">copy</button></div><pre>Given my system prompt above, draft 4 reusable follow-up prompts I'll likely
+need for this task (e.g. shorten, make more formal, add a data table, write a
+chaser). Keep each to one line I can paste. Label each with when to use it.</pre></div>
+
+  <h3>④ Wire one automation &amp; measure</h3>
+  <p>Add a single automation that removes a manual step — a Zapier/Make zap or a scheduled prompt — running in <strong>draft mode</strong> so you approve before anything sends. Then do the task the new way and record the new time.</p>
+  <div class="code"><div class="code__bar"><span class="code__tag">starter · automation spec</span><button class="code__copy">copy</button></div><pre>TRIGGER: [when it should run — new row / new email / Monday 8am].
+ACTION (AI): [what to generate, using my system prompt].
+OUTPUT: Create a DRAFT only — never auto-send.
+GUARDRAIL: A human reviews and approves before it goes out.
+Write this as clear steps I can build in Zapier or Make.</pre></div>
+
+  <h2>What to hand in</h2>
+  <p>One page (Google Doc, Notion, or a note) titled <em>"[Task] — automated"</em> containing: the task and its <strong>before/after time</strong>, your <strong>system prompt</strong>, your <strong>prompt library</strong>, a description (or screenshot) of the <strong>automation</strong>, and two lines on <strong>what broke or surprised you</strong>.</p>
+
+  <div class="call call--insight"><div class="call__k">◆ Success criteria — you've passed when…</div>
+    <p style="margin-bottom:.4rem">✓ A <strong>reusable assistant exists</strong> with a real system prompt you can run again next week.<br>
+    ✓ Your <strong>prompt library</strong> has at least 3 saved, labelled variations.<br>
+    ✓ <strong>One automation runs</strong> and does something useful — safely, in draft/approve mode.<br>
+    ✓ You can state a <strong>measured time saved</strong> (before vs. after), not a guess.<br>
+    ✓ No sensitive data went anywhere you'd regret in a breach.</p>
+  </div>
+
+  <div class="call call--try"><div class="call__k">▸ Stretch goal</div><p>Give your assistant a <strong>tiny eval set</strong> — 5 tricky real inputs and what a good output must include — and run them to prove the setup holds up. Then hand the whole thing to a colleague and see if <em>they</em> can use it without you explaining. A system a teammate can run is the real finish line.</p></div>
+
+  <div class="lnav">
+    <a href="index.html"><small>Back to</small><span>← Level 2 lessons</span></a>
+    <a class="next" href="reference.html"><small>Keep handy</small><span>Level 2 reference pack →</span></a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap" style="color:var(--ink-faint)">© <span data-year>2026</span> Panchakosha AI · Level 2 capstone · <a href="../index.html">Home</a></div>
+</footer>
+<script src="../assets/js/kosha.js"></script>
+</body>

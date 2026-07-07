@@ -1,0 +1,89 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Level 3 Capstone · Explain an LLM to a smart friend | Panchakosha AI</title>
+<meta name="description" content="The Level 3 capstone: write or record a ~500-word (3-minute) explainer that correctly walks a smart non-expert from tokens to the transformer, training and RLHF, and why LLMs hallucinate — in plain language, with one analogy and one simple diagram. Includes a brief, starter prompts, and success criteria.">
+<link rel="canonical" href="https://sreenivas-sadhu-prabhakara.github.io/panchakosha-ai/level-3/capstone.html">
+<meta property="og:title" content="Level 3 Capstone · Explain an LLM to a smart friend">
+<meta property="og:description" content="Prove you understand LLMs by teaching one: a ~500-word explainer from tokens to why it hallucinates, with one analogy and one diagram.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23e07a54' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='9.5' fill='none' stroke='%239b7be0' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%23e8b84b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/kosha.css">
+
+<body class="l3">
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="../index.html"><svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#e07a54" stroke-width="2"/><circle cx="16" cy="16" r="9.5" fill="none" stroke="#9b7be0" stroke-width="2"/><circle cx="16" cy="16" r="4.5" fill="#e8b84b"/></svg> Panchakosha&nbsp;AI</a>
+    <button class="nav__toggle" aria-label="Menu" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav__links" id="navlinks">
+      <a href="../level-1/index.html">1 · Use</a>
+      <a href="../level-2/index.html">2 · Master</a>
+      <a href="index.html">3 · Understand</a>
+      <a href="../level-4/index.html">4 · Build</a>
+      <a href="../level-5/index.html">5 · Innovate</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap"><p class="crumb"><a href="../index.html">Home</a> → <a href="index.html">Level 3</a> → <span>Capstone</span></p></div>
+
+<main class="wrap section" style="max-width:820px">
+  <p class="capstone__tag">🏛️ Level 3 Capstone</p>
+  <h1 style="margin-top:.4rem">Explain an LLM to a smart friend</h1>
+  <p class="lede">The surest test of understanding is teaching. Write (or record) a short, correct explainer that takes a smart non-expert from "text goes in" all the way to "why it sometimes makes things up" — in plain language, with one analogy and one simple diagram.</p>
+
+  <div class="capstone" style="margin:2rem 0">
+    <h3 style="margin-top:0">The goal</h3>
+    <p style="margin-bottom:0">Produce a clear, jargon-light explainer of <strong>about 500 words</strong> (or a <strong>3-minute</strong> talk) that walks in order through <strong>tokens → the transformer &amp; attention → training and RLHF → why it hallucinates</strong>. Use exactly one through-line analogy and one simple diagram. If a curious friend gets it, you've got it.</p>
+  </div>
+
+  <h2>The steps</h2>
+
+  <h3>① Draft the spine</h3>
+  <p>Write the path in order, one sentence per step first: tokens → embeddings → transformer/attention → training (pretrain → fine-tune → RLHF) → why it hallucinates. Get the sequence right before you flesh it out.</p>
+  <div class="code"><div class="code__bar"><span class="code__tag">starter</span><button class="code__copy">copy</button></div><pre>I'm writing a ~500-word explainer of how an LLM works, for a smart friend with no ML background. Here is my one-sentence-per-step outline: [paste]. Point out anything inaccurate or out of order before I expand it.</pre></div>
+
+  <h3>② Find one analogy</h3>
+  <p>Pick a single through-line analogy (a super-well-read autocomplete, a fluent improviser who never checks a fact, etc.) and use it consistently. One good analogy beats five half-ones.</p>
+  <div class="code"><div class="code__bar"><span class="code__tag">starter</span><button class="code__copy">copy</button></div><pre>Give me three candidate analogies for "next-token prediction" aimed at a non-expert. For each, note where the analogy breaks down, so I don't accidentally mislead my reader.</pre></div>
+
+  <h3>③ Draw one simple diagram</h3>
+  <p>Sketch a text/ASCII pipeline the reader can grasp at a glance: text → tokens → embeddings → transformer → next token. Keep it to one look; resist adding detail.</p>
+  <div class="code"><div class="code__bar"><span class="code__tag">starter</span><button class="code__copy">copy</button></div><pre>Here is my ASCII diagram of the LLM pipeline: [paste]. Is the order correct and are the labels accurate? Suggest a simpler version if mine is cluttered.</pre></div>
+
+  <h3>④ Explain the failure mode</h3>
+  <p>In plain words, say why the model can be fluent <em>and</em> wrong — that it predicts plausible text rather than looking facts up — and what the reader should do about it (verify anything that matters).</p>
+  <div class="code"><div class="code__bar"><span class="code__tag">starter</span><button class="code__copy">copy</button></div><pre>Read my paragraph on hallucination. Is it accurate to say the model predicts plausible text rather than looking facts up? Flag any overstatement or anything technically wrong: [paste]</pre></div>
+
+  <h3>⑤ Critique it for accuracy</h3>
+  <p>Have the model fact-check your explainer and flag any claim that's false, oversimplified to the point of being wrong, or hype. Fix what it catches — you stay the author.</p>
+  <div class="code"><div class="code__bar"><span class="code__tag">starter</span><button class="code__copy">copy</button></div><pre>Critique this explainer for technical accuracy for a general audience. List anything false, oversimplified into being wrong, or hyped. Don't rewrite it — just list the issues so I can fix them myself: [paste]</pre></div>
+
+  <h3>⑥ Test it on a human</h3>
+  <p>Read it to someone non-technical (or ask the model to role-play one). If they can hand you back a rough version of <em>token</em>, <em>prediction</em>, and <em>why it can be wrong</em>, it works.</p>
+  <div class="code"><div class="code__bar"><span class="code__tag">starter</span><button class="code__copy">copy</button></div><pre>Pretend you're a curious person with no tech background. Read my explainer, then tell me in your own words: what a token is, what the model is really doing, and why it can be confidently wrong: [paste]</pre></div>
+
+  <h2>What to hand in</h2>
+  <p>One piece — a document, a page, or a 3-minute recording — titled <em>"How an LLM works (for a smart friend)"</em>, containing your ~500-word explainer, the <strong>one analogy</strong> you chose, and the <strong>one diagram</strong>. Optionally include the model's accuracy critique and a line on what you changed because of it.</p>
+
+  <div class="call call--insight"><div class="call__k">◆ Success criteria — you've passed when…</div>
+    <p style="margin-bottom:.4rem">✓ It correctly covers <strong>tokens</strong>, <strong>next-token prediction</strong>, <strong>training (including RLHF)</strong>, and <strong>why it hallucinates</strong>.<br>
+    ✓ A <strong>non-expert can read it once</strong> and re-explain the gist back to you.<br>
+    ✓ It uses <strong>exactly one</strong> clear analogy and <strong>one</strong> simple diagram.<br>
+    ✓ No claim in it is actually false — you checked the hard ones against a source.</p>
+  </div>
+
+  <div class="call call--try"><div class="call__k">▸ Stretch goal</div><p>Record it as a 3-minute video or voice note — teaching out loud exposes the gaps fast. Or add one final paragraph on <strong>RAG</strong>: how feeding the model real source text patches the "makes things up" problem you just described.</p></div>
+
+  <div class="lnav">
+    <a href="index.html"><small>Back to</small><span>← Level 3 lessons</span></a>
+    <a class="next" href="reference.html"><small>Keep handy</small><span>Level 3 reference pack →</span></a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap" style="color:var(--ink-faint)">© <span data-year>2026</span> Panchakosha AI · Level 3 capstone · <a href="../index.html">Home</a></div>
+</footer>
+<script src="../assets/js/kosha.js"></script>
+</body>

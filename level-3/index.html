@@ -1,0 +1,233 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Level 3 · Understand — under the hood | Panchakosha AI</title>
+<meta name="description" content="Level 3 of Panchakosha AI: for the curious, no math degree. Demystify how large language models actually work — tokens, embeddings, the transformer, attention, training &amp; RLHF, context windows, hallucination, RAG, and model tradeoffs. Ends with a capstone and a reference pack.">
+<link rel="canonical" href="https://sreenivas-sadhu-prabhakara.github.io/panchakosha-ai/level-3/">
+<meta property="og:title" content="Level 3 · Understand — under the hood">
+<meta property="og:description" content="For the curious. How LLMs really work — tokens, transformers, training, hallucination, RAG — no heavy math. Capstone + reference pack included.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23e07a54' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='9.5' fill='none' stroke='%239b7be0' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%23e8b84b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/kosha.css">
+
+<body class="l3">
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="../index.html">
+      <svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#e07a54" stroke-width="2"/><circle cx="16" cy="16" r="9.5" fill="none" stroke="#9b7be0" stroke-width="2"/><circle cx="16" cy="16" r="4.5" fill="#e8b84b"/></svg>
+      Panchakosha&nbsp;AI
+    </a>
+    <button class="nav__toggle" aria-label="Menu" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav__links" id="navlinks">
+      <a href="../level-1/index.html">1 · Use</a>
+      <a href="../level-2/index.html">2 · Master</a>
+      <a href="index.html" aria-current="page">3 · Understand</a>
+      <a href="../level-4/index.html">4 · Build</a>
+      <a href="../level-5/index.html">5 · Innovate</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <p class="crumb"><a href="../index.html">Home</a> → <span>Level 3 · Understand</span></p>
+</div>
+
+<header class="wrap pagehead">
+  <p class="eyebrow">Level 3 · Manomaya — the sheath of mind</p>
+  <h1 style="max-width:18ch">Understand — under the&nbsp;hood</h1>
+  <p class="lede">The sheath of mind: where you stop treating AI as magic and start seeing the machine. No math degree required — just clear analogies for what's really happening when a model answers you, and why it's so fluent yet sometimes so wrong.</p>
+  <div class="chips">
+    <span class="chip">🧠 For the <b>curious</b> — no math degree</span>
+    <span class="chip">⏱️ <b>~4 hours</b>, self-paced</span>
+    <span class="chip">🧰 8 lessons</span>
+    <span class="chip">🏛️ 1 capstone</span>
+    <span class="chip">🎒 reference pack</span>
+  </div>
+  <div class="hero__cta">
+    <a class="btn btn--solid" href="#l0">Start lesson 3.0 <span class="btn__arrow">→</span></a>
+    <a class="btn btn--ghost" href="capstone.html">Preview the capstone</a>
+  </div>
+</header>
+
+<div class="wrap lesson">
+  <!-- LEFT RAIL -->
+  <aside class="rail" aria-label="Lessons in this course">
+    <p class="rail__title">This course</p>
+    <ol>
+      <li><a href="#l0">3.0 · What a model is</a></li>
+      <li><a href="#l1">3.1 · Tokens &amp; embeddings</a></li>
+      <li><a href="#l2">3.2 · Transformer &amp; attention</a></li>
+      <li><a href="#l3">3.3 · How models learn</a></li>
+      <li><a href="#l4">3.4 · Context windows</a></li>
+      <li><a href="#l5">3.5 · Why it hallucinates</a></li>
+      <li><a href="#l6">3.6 · RAG in concept</a></li>
+      <li><a href="#l7">3.7 · Models &amp; tradeoffs</a></li>
+      <li><a href="capstone.html">🏛️ Capstone</a></li>
+      <li><a href="reference.html">🎒 Reference pack</a></li>
+    </ol>
+  </aside>
+
+  <!-- MAIN -->
+  <article class="prose">
+
+    <section id="l0">
+      <p class="eyebrow">Lesson 3.0</p>
+      <h2>What a language model actually is</h2>
+      <p>At its core, a <strong>large language model</strong> (LLM) does one deceptively simple thing: it predicts the next chunk of text. Given everything written so far, it asks <em>"what comes next most plausibly?"</em>, picks something, adds it, and repeats — one small piece at a time until the answer is done.</p>
+      <p>It learned this by reading an enormous amount of writing — books, articles, code, conversations — and adjusting itself until its guesses matched the real text. Nobody handed it a list of facts. It absorbed <strong>patterns</strong>: how sentences flow, how an argument is built, how a recipe or a legal clause tends to read.</p>
+      <p>This is why it feels so fluent — fluency is exactly what it was trained for — and also why it can be confidently wrong. A plausible-sounding sentence and a true sentence often look identical from the inside. Think of it as a wildly well-read <em>autocomplete</em>, not an oracle.</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">try asking</span><button class="code__copy">copy</button></div><pre>Finish this sentence, then tell me how confident you are and why:
+"The three primary colors of light are ___."</pre></div>
+      <div class="call call--insight"><div class="call__k">◆ Insight</div><p>A model doesn't <em>look up</em> answers in a database — it <em>generates</em> them, one token at a time, from patterns. Keep that single idea in your pocket. Almost every other lesson in this level is a consequence of it.</p></div>
+    </section>
+
+    <section id="l1">
+      <p class="eyebrow">Lesson 3.1</p>
+      <h2>Tokens &amp; embeddings</h2>
+      <p>A model never sees letters or whole words the way you do. First your text is chopped into <strong>tokens</strong> — common sub-word chunks. Frequent words like "the" are a single token; rarer or longer words get split into pieces. A rough rule of thumb for English: one token is about four characters, or roughly ¾ of a word.</p>
+      <p>Each token is then turned into an <strong>embedding</strong>: a long list of numbers (a <em>vector</em>) that places the token in a kind of "meaning space." Tokens that appear in similar contexts — "king" and "queen", "Paris" and "Rome" — end up with nearby numbers. That's how plain arithmetic can carry a sense of meaning and relationship.</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">diagram</span><button class="code__copy">copy</button></div><pre>"unbelievable"  →  [ un ][ believ ][ able ]        3 tokens
+
+    token "believ"  →  [ 0.12, -0.99, 0.41, 0.07, ... ]   an embedding
+                        (a list of numbers = a vector in "meaning space")</pre></div>
+      <p>Tokens are also the unit of <strong>money and memory</strong>. Providers bill per token, and every model has a maximum number of tokens it can handle at once. That's why a very long document can be "too big," and why a tight prompt is cheaper — you are literally paying and budgeting by the chunk.</p>
+      <div class="call call--note"><div class="call__k">● Note</div><p>Counts vary by language. English is efficient; scripts the tokenizer saw less of (and things like long code or unusual names) can use more tokens for the same meaning — so they cost more and fill the window faster.</p></div>
+    </section>
+
+    <section id="l2">
+      <p class="eyebrow">Lesson 3.2</p>
+      <h2>The transformer &amp; attention</h2>
+      <p>The <strong>transformer</strong> is the engine inside modern LLMs (it's the "T" in GPT). You don't need the math — you need one idea: <strong>attention</strong>.</p>
+      <p>As the model reads, attention lets it decide which earlier tokens matter most for what comes next. Take the sentence: <em>"The trophy didn't fit in the suitcase because it was too big."</em> To make sense of <em>"it"</em>, the model leans hard on "trophy" and "suitcase" and barely on "the." Attention is that weighting — a learned sense of which words to look back at, and how strongly.</p>
+      <p>The other breakthrough was <strong>parallelism</strong>. Older networks read strictly one word at a time. A transformer looks at all the tokens together and computes those attention weights across them at once. That's what let researchers train far larger models on far more text — and "bigger model + more data" turned out to buy a lot of capability.</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">the pipeline</span><button class="code__copy">copy</button></div><pre>your text
+   │
+   ▼
+[ tokens ] ─▶ [ embeddings ] ─▶ ┌───────────────────────┐ ─▶ next-token
+                                │   transformer layers  │    probabilities
+                                │  (attention inside)   │        │
+                                └───────────────────────┘        ▼
+                                                         pick one, append, repeat</pre></div>
+      <div class="call call--try"><div class="call__k">▸ Try it</div><p>Ask your assistant: <em>"In the sentence 'the trophy didn't fit in the suitcase because it was too big,' what does <b>it</b> refer to, and which words told you?"</em> Watch it reason about exactly the words attention would weigh.</p></div>
+    </section>
+
+    <section id="l3">
+      <p class="eyebrow">Lesson 3.3</p>
+      <h2>How models learn</h2>
+      <p>Training happens in stages, and each stage does a different job:</p>
+      <ol>
+        <li><strong>Pretraining.</strong> The model reads a vast slice of text and does nothing but predict the next token, over and over, adjusting billions of internal numbers — its <em>parameters</em> (or "weights") — until it's good at it. The result is a <strong>base model</strong>: fluent and knowledgeable, but rambling and not especially helpful. It just continues text.</li>
+        <li><strong>Fine-tuning.</strong> The base model is trained further on a smaller, carefully curated set of examples — good requests paired with good answers. This teaches it to behave like a helpful assistant that follows instructions instead of merely autocompleting.</li>
+        <li><strong>RLHF</strong> (Reinforcement Learning from Human Feedback). Humans compare pairs of answers and mark which is better; the model is nudged toward the qualities people preferred — clearer, more honest, more helpful, safer. This stage shapes <em>behavior and tone</em> more than raw knowledge.</li>
+      </ol>
+      <p>Because pretraining uses a fixed snapshot of text, every model has a <strong>knowledge cutoff</strong> — a date after which it simply wasn't trained on anything. On its own, a base model has no live internet: it can't know today's news, prices, or your private files. When a tool <em>does</em> answer with current information, it's because something fetched that text and handed it to the model — which is exactly what you'll build in <a href="../level-4/index.html">Level 4</a>.</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">try asking</span><button class="code__copy">copy</button></div><pre>What is your knowledge cutoff date, and what does that mean
+for questions about recent events? Be specific about your limits.</pre></div>
+      <div class="call call--note"><div class="call__k">● Note</div><p>The assistant you chat with is a stack: a base model, plus fine-tuning, plus RLHF, often plus tools (web search, code, file reading) bolted on top. "The model" and "the product around it" are not the same thing.</p></div>
+    </section>
+
+    <section id="l4">
+      <p class="eyebrow">Lesson 3.4</p>
+      <h2>Context windows &amp; memory</h2>
+      <p>A model has no memory of its own between messages. Everything it "knows" in the moment is whatever fits inside its <strong>context window</strong> — a fixed-size workspace measured in tokens. Into that window goes the hidden system prompt, your instructions, the whole conversation so far, and anything you've attached.</p>
+      <p>Each time you hit send, the <em>entire</em> conversation is re-fed to the model so it can predict the next reply. There is no separate memory it quietly consults — <strong>the transcript is the memory</strong>.</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">diagram</span><button class="code__copy">copy</button></div><pre>┌──────────────  context window  ( a fixed number of tokens )  ──────────────┐
+│  system prompt │ your files │ earlier turns │ ... │ your latest message │
+└─────────────────────────────────────────────────────────────────────────────┘
+      ▲ when it's full, the OLDEST tokens slide off the left — and are forgotten</pre></div>
+      <p>When a conversation grows past the window's limit, the oldest content falls out to make room. That's why a very long chat can start "forgetting" what you said at the beginning, or lose the thread of a huge document. It isn't being careless — that text is simply no longer in view.</p>
+      <div class="call call--insight"><div class="call__k">◆ Insight</div><p>It didn't forget because it's dumb; it forgot because that text <em>left the window</em>. Two practical moves: start a fresh chat to clear the slate on purpose, and paste the few key facts back in when a long thread starts drifting.</p></div>
+    </section>
+
+    <section id="l5">
+      <p class="eyebrow">Lesson 3.5</p>
+      <h2>Why it hallucinates</h2>
+      <p>A <strong>hallucination</strong> is when the model states something false with complete confidence — a fake citation, a plausible-but-wrong date, a software function that doesn't exist. It isn't lying and it isn't broken. It's doing the only thing it ever does: producing the most plausible next tokens.</p>
+      <p>Remember, there's no fact store inside. When the true answer isn't strongly represented in what it learned, the model <em>still</em> has to produce something — so it generates text that <em>looks like</em> a correct answer. A convincing wrong answer and a right answer are built the same way, which is exactly why hallucinations sound so authoritative.</p>
+      <p>There's also deliberate randomness. Rather than always taking the single highest-probability token, the model <strong>samples</strong> from the range of likely ones. A setting called <strong>temperature</strong> controls how adventurous that sampling is: low temperature stays safe and repetitive, higher temperature adds variety and "creativity" — and a little more room to drift off the facts. Wonderful for brainstorming; risky for exact quotes.</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">verify, safely</span><button class="code__copy">copy</button></div><pre>Give me three sources for that claim, each with a link,
+and tell me how sure you are of each. If you're not certain, say so plainly.</pre></div>
+      <div class="call call--warn"><div class="call__k">▲ Careful</div><p>This is the Level 1 habit, now explained: draft, explain and explore freely — but for any fact that matters, ask for a source you can click and check it. <strong>The model's confidence tells you nothing about whether it's right.</strong></p></div>
+    </section>
+
+    <section id="l6">
+      <p class="eyebrow">Lesson 3.6</p>
+      <h2>RAG in concept</h2>
+      <p>You've now met the two big limits: a model only knows what it was trained on (up to its cutoff), and it will confidently invent things when it doesn't know. <strong>RAG — Retrieval-Augmented Generation</strong> — is the standard fix, and it's simpler than the name suggests.</p>
+      <p>The idea: <em>before</em> the model answers, go and fetch the most relevant passages from a trusted source — a company handbook, a folder of PDFs, a website, a database — and paste those passages into the context window alongside the question. Now the model isn't answering from fuzzy memory; it's answering from real text sitting right in front of it, and it can quote and cite it.</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">the RAG flow</span><button class="code__copy">copy</button></div><pre>your question
+      │
+      ▼
+[ search your documents ] ─▶ top matching snippets
+      │                              │
+      └──────────────┬───────────────┘
+                     ▼
+   [ question + snippets ] ─▶ model ─▶ grounded answer  ( with citations )</pre></div>
+      <p>This is how you get an assistant that knows your documents, or knows about events after its cutoff, <strong>without retraining anything</strong>. You're not changing the model — you're changing what's in its context. You'll build a real one in <a href="../level-4/index.html">Level 4</a>.</p>
+      <div class="call call--try"><div class="call__k">▸ Try it</div><p>Hand-run RAG right now: paste 3–4 paragraphs from a document, then ask — <em>"Using only the text above, answer this: [question]. If the text doesn't say, tell me it doesn't."</em> That last clause is your hand-built guardrail against making things up.</p></div>
+    </section>
+
+    <section id="l7">
+      <p class="eyebrow">Lesson 3.7</p>
+      <h2>Models, benchmarks &amp; tradeoffs</h2>
+      <p>There isn't one model; there are <strong>families</strong>, and within a family, <strong>sizes</strong>. As a rough rule, a bigger model trained on more data is more capable — better at hard reasoning, nuance, and messy instructions — but it's also slower and costs more per token. Smaller models are faster and cheaper, and often perfectly good for straightforward work.</p>
+      <p>That's the core tradeoff: a triangle of <strong>quality, speed, and cost</strong>. You rarely max all three at once. Choosing a model is really choosing a point in that triangle for the job in front of you.</p>
+      <p>Anthropic's <strong>Claude</strong> is a clean illustration: it ships in tiers — <strong>Haiku</strong> (small and fast), <strong>Sonnet</strong> (a balanced middle), and <strong>Opus</strong> (the largest and most capable). A sensible pattern is to reach for a small, fast model for easy or high-volume tasks (tagging, quick rewrites, simple extraction) and a frontier model only when a task genuinely needs deep reasoning. Plenty of real systems mix both.</p>
+      <div class="code"><div class="code__bar"><span class="code__tag">how to choose</span><button class="code__copy">copy</button></div><pre>simple + high-volume?   ─▶  small fast model   (cheap, quick)
+needs hard reasoning?   ─▶  frontier model     (slower, pricier)
+genuinely unsure?       ─▶  run BOTH on YOUR real task and compare</pre></div>
+      <p>You'll also see leaderboards and benchmark scores. Treat them as a <strong>rough signal, not truth</strong>. Benchmarks test narrow slices of ability, can leak into training data, and rarely match your exact use. The reliable test is to run your own real task on two candidates and compare the outputs.</p>
+      <div class="call call--insight"><div class="call__k">◆ Insight</div><p>Good default: pick the <em>smallest</em> model that reliably does the job, and scale up only when it visibly fails. Capability you don't need is just latency and cost you're paying for.</p></div>
+
+      <div style="margin-top:2.5rem;text-align:center">
+        <p style="color:var(--ink-soft)">That's the machinery. You now know what's happening under the hood — enough to use AI wisely, and to start building with it next.</p>
+        <button class="btn btn--solid" data-complete data-level="3" data-lesson="course">Mark this course complete</button>
+      </div>
+    </section>
+
+    <!-- next steps -->
+    <div class="lnav">
+      <a href="capstone.html"><small>Now do the</small><span>🏛️ Level 3 Capstone — Explain an LLM to a smart friend</span></a>
+      <a class="next" href="../level-4/index.html"><small>When ready</small><span>Level 4 · Build — put this to work →</span></a>
+    </div>
+  </article>
+
+  <!-- RIGHT REFS RAIL -->
+  <aside class="refs-rail" aria-label="References">
+    <p class="rail__title">Take it with you</p>
+    <a class="ref-card" href="reference.html"><b>🎒 Level 3 reference pack</b><span>Concept map, glossary, mental models</span></a>
+    <a class="ref-card" href="capstone.html"><b>🏛️ Capstone brief</b><span>Explain an LLM to a smart friend</span></a>
+    <p class="rail__title" style="margin-top:1.5rem">Go deeper</p>
+    <a class="ref-card" href="https://www.3blue1brown.com/topics/neural-networks" target="_blank" rel="noopener"><b>3Blue1Brown <span class="ext">↗</span></b><span>Visual neural-net &amp; transformer series</span></a>
+    <a class="ref-card" href="https://jalammar.github.io/illustrated-transformer/" target="_blank" rel="noopener"><b>The Illustrated Transformer <span class="ext">↗</span></b><span>Picture-first walkthrough</span></a>
+    <a class="ref-card" href="https://www.anthropic.com/research" target="_blank" rel="noopener"><b>Anthropic — Research <span class="ext">↗</span></b><span>How models work, interpretability</span></a>
+  </aside>
+</div>
+
+<footer class="footer">
+  <div class="wrap footer__grid">
+    <div>
+      <a class="brand" href="../index.html" style="margin-bottom:.8rem"><svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#e07a54" stroke-width="2"/><circle cx="16" cy="16" r="9.5" fill="none" stroke="#9b7be0" stroke-width="2"/><circle cx="16" cy="16" r="4.5" fill="#e8b84b"/></svg> Panchakosha AI</a>
+      <p style="max-width:34ch">Learn AI from the outside in.</p>
+    </div>
+    <div>
+      <h4>The five levels</h4>
+      <a href="../level-1/index.html">1 · Use</a>
+      <a href="../level-2/index.html">2 · Master</a>
+      <a href="../level-3/index.html">3 · Understand</a>
+      <a href="../level-4/index.html">4 · Build</a>
+      <a href="../level-5/index.html">5 · Innovate</a>
+    </div>
+    <div>
+      <h4>This course</h4>
+      <a href="index.html">Lessons</a>
+      <a href="capstone.html">Capstone</a>
+      <a href="reference.html">Reference pack</a>
+    </div>
+  </div>
+  <div class="wrap" style="margin-top:2rem;color:var(--ink-faint)">© <span data-year>2026</span> Panchakosha AI · Level 3 · Understand.</div>
+</footer>
+
+<script src="../assets/js/kosha.js"></script>
+</body>

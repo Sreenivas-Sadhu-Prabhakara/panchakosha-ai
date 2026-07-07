@@ -1,0 +1,165 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Level 5 Reference Pack | Panchakosha AI</title>
+<meta name="description" content="The Level 5 reference pack: an agent-architecture diagram, the prompt-vs-RAG-vs-fine-tune decision table, a Claude tool-use snippet, a machine-learning and agents glossary, and curated links to keep going.">
+<link rel="canonical" href="https://sreenivas-sadhu-prabhakara.github.io/panchakosha-ai/level-5/reference.html">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='14' fill='none' stroke='%23e07a54' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='9.5' fill='none' stroke='%239b7be0' stroke-width='2'/%3E%3Ccircle cx='16' cy='16' r='4.5' fill='%23e8b84b'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/css/kosha.css">
+
+<body class="l5">
+<header class="nav">
+  <div class="wrap nav__in">
+    <a class="brand" href="../index.html"><svg class="brand__mark" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="#e07a54" stroke-width="2"/><circle cx="16" cy="16" r="9.5" fill="none" stroke="#9b7be0" stroke-width="2"/><circle cx="16" cy="16" r="4.5" fill="#e8b84b"/></svg> Panchakosha&nbsp;AI</a>
+    <button class="nav__toggle" aria-label="Menu" aria-expanded="false" aria-controls="navlinks">Menu</button>
+    <nav class="nav__links" id="navlinks">
+      <a href="../level-1/index.html">1 · Use</a>
+      <a href="../level-2/index.html">2 · Master</a>
+      <a href="../level-3/index.html">3 · Understand</a>
+      <a href="../level-4/index.html">4 · Build</a>
+      <a href="index.html">5 · Innovate</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap"><p class="crumb"><a href="../index.html">Home</a> → <a href="index.html">Level 5</a> → <span>Reference pack</span></p></div>
+
+<main class="wrap section" style="max-width:900px">
+  <p class="eyebrow">🎒 Level 5 · take it with you</p>
+  <h1>Reference pack</h1>
+  <p class="lede">Everything from Level 5 on one page — the agent architecture, the adaptation decision, the tool-use shape, a glossary, and where to go deeper.</p>
+
+  <!-- AGENT ARCHITECTURE -->
+  <h2 style="margin-top:2.5rem">Agent architecture</h2>
+  <p style="color:var(--ink-mute)">The four capabilities and the control loop that ties them together.</p>
+  <div class="code"><div class="code__bar"><span class="code__tag">the anatomy of an agent</span><button class="code__copy">copy</button></div><pre>        goal in
+           │
+           ▼
+  ┌───────────────────────── AGENT ─────────────────────────┐
+  │                                                         │
+  │   ┌────────────┐   reason    ┌────────────┐             │
+  │   │ PERCEPTION │ ──────────▶ │  PLANNING  │             │
+  │   │  context,  │             │ what to do │             │
+  │   │  results   │             │   next?    │             │
+  │   └─────▲──────┘             └──────┬─────┘             │
+  │         │ observe               act │                   │
+  │         │                           ▼                   │
+  │   ┌─────┴──────┐             ┌────────────┐             │
+  │   │   MEMORY   │ ◀─────────▶ │  TOOL USE  │             │
+  │   │  history,  │             │ call APIs, │             │
+  │   │  scratch   │             │  run code  │             │
+  │   └────────────┘             └──────┬─────┘             │
+  │                                     │                   │
+  └─────────────────────────────────────┼───────────────────┘
+                                        ▼
+                             external world
+                         (APIs, files, MCP servers)
+
+  control loop:  reason ─▶ act ─▶ observe ─▶ reason ─▶ …  until done</pre></div>
+
+  <!-- DECISION -->
+  <h2 style="margin-top:2.5rem">Prompt vs RAG vs fine-tune</h2>
+  <p style="color:var(--ink-mute)">Work top-down — the cheapest tool that solves the problem wins. Fine-tuning is the last resort, not the first.</p>
+  <div class="code" style="background:var(--panel)"><div style="overflow-x:auto"><table style="width:100%;border-collapse:collapse;font-size:.92rem">
+    <thead><tr style="text-align:left;color:var(--ink-mute);font-family:var(--mono);font-size:.75rem;text-transform:uppercase;letter-spacing:.08em">
+      <th style="padding:.7rem 1rem">Approach</th><th style="padding:.7rem 1rem">Reach for it when…</th><th style="padding:.7rem 1rem">Cost / speed</th></tr></thead>
+    <tbody style="color:var(--ink-soft)">
+      <tr style="border-top:1px solid var(--hairline)"><td style="padding:.7rem 1rem"><strong>Prompting</strong></td><td style="padding:.7rem 1rem">Behaviour you can specify in words. Always try first.</td><td style="padding:.7rem 1rem">Cheapest · instant iteration</td></tr>
+      <tr style="border-top:1px solid var(--hairline)"><td style="padding:.7rem 1rem"><strong>RAG</strong></td><td style="padding:.7rem 1rem">Model needs facts it doesn't have — your private or current data.</td><td style="padding:.7rem 1rem">Cheap · no training</td></tr>
+      <tr style="border-top:1px solid var(--hairline)"><td style="padding:.7rem 1rem"><strong>Fine-tuning</strong></td><td style="padding:.7rem 1rem">A consistent behaviour, tone, or format prompting can't hold — and you have quality labelled data.</td><td style="padding:.7rem 1rem">Costly · slow · can go stale</td></tr>
+    </tbody>
+  </table></div></div>
+  <p style="color:var(--ink-mute)">Rule of thumb: fine-tuning teaches <strong>skills and style</strong>, not fresh <strong>facts</strong>. If the need is "know the latest" or "know my data," that's RAG.</p>
+
+  <!-- TOOL USE SNIPPET -->
+  <h2 style="margin-top:2.5rem">Claude tool use, minimal</h2>
+  <p style="color:var(--ink-mute)">Define a tool, run the loop while <code>stop_reason == "tool_use"</code>, feed each <code>tool_result</code> back with its <code>tool_use_id</code>.</p>
+  <div class="code"><div class="code__bar"><span class="code__tag">python · claude tool loop</span><button class="code__copy">copy</button></div><pre>import anthropic
+
+client = anthropic.Anthropic()
+
+tools = [{
+    "name": "get_weather",
+    "description": "Get the current weather for a city.",
+    "input_schema": {
+        "type": "object",
+        "properties": {"city": {"type": "string"}},
+        "required": ["city"],
+    },
+}]
+
+def run_tool(name, args):
+    if name == "get_weather":
+        return f"18C, light rain in {args['city']}"
+    raise ValueError(name)
+
+messages = [{"role": "user", "content": "Weather in Paris?"}]
+
+while True:
+    resp = client.messages.create(
+        model="claude-sonnet-4-6",     # or claude-opus-4-8 / claude-haiku-4-5-20251001
+        max_tokens=1024,
+        tools=tools,
+        messages=messages,
+    )
+    messages.append({"role": "assistant", "content": resp.content})
+
+    if resp.stop_reason != "tool_use":
+        break
+
+    results = [
+        {"type": "tool_result", "tool_use_id": b.id,
+         "content": run_tool(b.name, b.input)}
+        for b in resp.content if b.type == "tool_use"
+    ]
+    messages.append({"role": "user", "content": results})
+
+print(next(b.text for b in resp.content if b.type == "text"))</pre></div>
+
+  <!-- GLOSSARY -->
+  <h2 style="margin-top:2.5rem">Glossary</h2>
+  <div class="panel">
+    <dl style="margin:0;display:grid;gap:.9rem">
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Gradient descent</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">The optimizer. Nudge each parameter in the direction that lowers the loss, repeat until it stops improving.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Backpropagation</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">The chain rule applied through the network to compute each weight's gradient — how much it contributed to the loss.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Parameters / weights</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">The numbers a model learns. "Training" means finding good values for them; a large model has billions.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Activation</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">A non-linear function (e.g. ReLU) applied after a layer's weighted sum. Without it, stacked layers collapse into one.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Loss</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">A single number measuring how wrong the model's predictions are. Training minimizes it.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Embedding</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">Content turned into a vector so that meaning becomes geometry — similar things sit close in the vector space.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Fine-tuning</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">Continuing to train a pretrained model on your own data to internalize a behaviour, style, or domain.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">LoRA / PEFT</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">Parameter-efficient fine-tuning. Freeze the base model, train tiny add-on matrices (LoRA) — well under 1% of the weights.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">RLHF</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">Reinforcement Learning from Human Feedback: train a reward model on human preferences, then optimize the policy against it.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">DPO</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">Direct Preference Optimization: reach a similar result to RLHF by optimizing the policy directly on preference pairs — no separate reward model.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Constitutional AI</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">Anthropic's approach: the model critiques and revises its own answers against a written set of principles, so much of the feedback is AI-generated (RLAIF).</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">ReAct</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">The agent control-loop pattern: reason → act → observe → repeat, until the goal is met.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Tool use</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">Function calling. The model returns a structured request to run a tool; your code executes it and returns the result.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">MCP</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">Model Context Protocol — an open standard for connecting agents to tools, data, and services. Write a connector once, plug in anywhere.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Multi-agent</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">Several specialized agents (roles, hand-offs, a coordinator) working toward one goal, instead of a single agent.</dd></div>
+      <div><dt style="font-family:var(--display);color:var(--ink);font-size:1.1rem">Eval</dt><dd style="margin:.1rem 0 0;color:var(--ink-mute)">A test harness that runs the system on known inputs and scores the outputs — how you turn "seems reliable" into a number.</dd></div>
+    </dl>
+  </div>
+
+  <!-- LINKS -->
+  <h2 style="margin-top:2.5rem">Curated links</h2>
+  <div class="take">
+    <a class="ref-card" href="https://karpathy.ai/zero-to-hero.html" target="_blank" rel="noopener"><b>Neural Networks: Zero to Hero <span class="ext">↗</span></b><span>Andrej Karpathy — build a net from scratch</span></a>
+    <a class="ref-card" href="https://www.anthropic.com/engineering/building-effective-agents" target="_blank" rel="noopener"><b>Building effective agents <span class="ext">↗</span></b><span>Anthropic — patterns &amp; anti-patterns</span></a>
+    <a class="ref-card" href="https://modelcontextprotocol.io" target="_blank" rel="noopener"><b>Model Context Protocol <span class="ext">↗</span></b><span>The open standard, docs &amp; SDKs</span></a>
+    <a class="ref-card" href="https://docs.anthropic.com/en/docs/build-with-claude/tool-use" target="_blank" rel="noopener"><b>Claude tool use docs <span class="ext">↗</span></b><span>Anthropic — the tool-use API</span></a>
+    <a class="ref-card" href="https://arxiv.org/abs/1706.03762" target="_blank" rel="noopener"><b>Attention Is All You Need <span class="ext">↗</span></b><span>The Transformer paper (2017)</span></a>
+    <a class="ref-card" href="https://arxiv.org/abs/2210.03629" target="_blank" rel="noopener"><b>ReAct <span class="ext">↗</span></b><span>Reason + act, the agent-loop paper</span></a>
+  </div>
+
+  <div class="lnav">
+    <a href="capstone.html"><small>Do the</small><span>← Level 5 capstone</span></a>
+    <a class="next" href="../index.html"><small>You've reached the core</small><span>Return to the surface →</span></a>
+  </div>
+</main>
+
+<footer class="footer">
+  <div class="wrap" style="color:var(--ink-faint)">© <span data-year>2026</span> Panchakosha AI · Level 5 reference · <a href="../index.html">Home</a></div>
+</footer>
+<script src="../assets/js/kosha.js"></script>
+</body>
