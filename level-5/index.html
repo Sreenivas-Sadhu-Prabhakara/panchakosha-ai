@@ -1,7 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Level 5 · Innovate — ML, AI &amp; agents | Panchakosha AI</title>
-<meta name="description" content="Level 5 of Panchakosha AI: for engineers. From ML foundations and neural networks to embeddings, fine-tuning, alignment, and tool-using agents with the Claude API and MCP. Ends with a build-an-agent capstone and a reference pack.">
+<meta name="description" content="Level 5 · for engineers. ML foundations to agents — neural nets, embeddings, fine-tuning, alignment, tool use and MCP. Capstone + reference pack.">
 <link rel="canonical" href="https://sreenivas-sadhu-prabhakara.github.io/panchakosha-ai/level-5/">
 <meta property="og:title" content="Level 5 · Innovate — ML, AI &amp; agents">
 <meta property="og:description" content="For engineers. ML, neural nets, embeddings, fine-tuning, alignment, and agents — with real Claude tool-use code. Capstone + reference pack included.">
@@ -41,7 +43,7 @@
   <div class="chips">
     <span class="chip">🛠️ For <b>engineers</b></span>
     <span class="chip">⏱️ <b>~8 hours</b>, hands-on</span>
-    <span class="chip">🧩 8 lessons</span>
+    <span class="chip">🧰 8 lessons</span>
     <span class="chip">🏛️ 1 capstone</span>
     <span class="chip">🎒 reference pack</span>
   </div>
@@ -171,8 +173,8 @@ vecs = model.encode(docs)                          # shape (3, 384)
 def cosine(a, b):
     return np.dot(a, b) / (np.linalg.norm(a) * np.linalg.norm(b))
 
-print(round(cosine(vecs[0], vecs[1]), 2))   # ~0.7  same meaning, different words
-print(round(cosine(vecs[0], vecs[2]), 2))   # ~0.05 unrelated</pre></div>
+print(round(cosine(vecs[0], vecs[1]), 2))   # high  (~0.6) same meaning, different words
+print(round(cosine(vecs[0], vecs[2]), 2))   # low   (~0.1) unrelated</pre></div>
       <div class="call call--insight"><div class="call__k">◆ Insight</div><p>A vector database (FAISS, pgvector, Pinecone) is just this at scale: store millions of embeddings, find the nearest <em>k</em> in milliseconds. RAG isn't magic — it's a nearest-neighbour lookup feeding a prompt. Understanding that demystifies most "chat with your docs" products.</p></div>
     </section>
 
@@ -335,8 +337,8 @@ for block in response.content:
       "args": ["-y", "@modelcontextprotocol/server-filesystem", "/data"]
     },
     "git": {
-      "command": "npx",
-      "args": ["-y", "@modelcontextprotocol/server-git", "--repository", "/data/repo"]
+      "command": "uvx",
+      "args": ["mcp-server-git", "--repository", "/data/repo"]
     }
   }
 }</pre></div>

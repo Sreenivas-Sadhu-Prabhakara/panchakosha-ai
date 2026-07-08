@@ -1,7 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Level 3 · Understand — under the hood | Panchakosha AI</title>
-<meta name="description" content="Level 3 of Panchakosha AI: for the curious, no math degree. Demystify how large language models actually work — tokens, embeddings, the transformer, attention, training &amp; RLHF, context windows, hallucination, RAG, and model tradeoffs. Ends with a capstone and a reference pack.">
+<meta name="description" content="Level 3 · for the curious. How LLMs really work — tokens, transformers, training, context windows, hallucination, RAG — no heavy math. Capstone + reference pack.">
 <link rel="canonical" href="https://sreenivas-sadhu-prabhakara.github.io/panchakosha-ai/level-3/">
 <meta property="og:url" content="https://sreenivas-sadhu-prabhakara.github.io/panchakosha-ai/level-3/">
 <meta property="og:title" content="Level 3 · Understand — under the hood">
@@ -137,7 +139,7 @@ for questions about recent events? Be specific about your limits.</pre></div>
 │  system prompt │ your files │ earlier turns │ ... │ your latest message │
 └─────────────────────────────────────────────────────────────────────────────┘
       ▲ when it's full, the OLDEST tokens slide off the left — and are forgotten</pre></div>
-      <p>When a conversation grows past the window's limit, the oldest content falls out to make room. That's why a very long chat can start "forgetting" what you said at the beginning, or lose the thread of a huge document. It isn't being careless — that text is simply no longer in view.</p>
+      <p>When a conversation grows past the window's limit, the oldest content falls out to make room. That's why a very long chat can start "forgetting" what you said at the beginning, or lose the thread of a huge document. It isn't being careless — that text is simply no longer in view. (Strictly, it's the chat <em>app</em> that trims older turns to fit; a raw API call that exceeds the window is rejected outright rather than silently dropping text.)</p>
       <div class="call call--insight"><div class="call__k">◆ Insight</div><p>It didn't forget because it's dumb; it forgot because that text <em>left the window</em>. Two practical moves: start a fresh chat to clear the slate on purpose, and paste the few key facts back in when a long thread starts drifting.</p></div>
     </section>
 

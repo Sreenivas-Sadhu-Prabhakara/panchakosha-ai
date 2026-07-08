@@ -1,7 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Level 4 · Build — ship AI apps | Panchakosha AI</title>
-<meta name="description" content="Level 4 of Panchakosha AI: for developers. Ship real AI apps with the Claude API — your first call, prompting in code, a RAG pipeline, deploying on a hyperscaler, evals, guardrails and observability. Ends with a capstone and a reference pack.">
+<meta name="description" content="Level 4 · for developers. Ship AI apps with the Claude API — first call, RAG, deploy on a hyperscaler, evals and guardrails. Capstone + reference pack.">
 <link rel="canonical" href="https://sreenivas-sadhu-prabhakara.github.io/panchakosha-ai/level-4/">
 <meta property="og:title" content="Level 4 · Build — ship AI apps">
 <meta property="og:description" content="For developers. Call the Claude API in real code, build RAG, deploy to the cloud, and add evals and guardrails. Capstone + reference pack included.">
@@ -285,7 +287,7 @@ gcloud run deploy rag-api \
   --allow-unauthenticated
 
 # → Service URL: https://rag-api-xxxxx.a.run.app  (your public backend)</pre></div>
-      <div class="call call--note"><div class="call__k">● Note</div><p>If your org already lives on a hyperscaler, you can reach Claude <em>through</em> it instead of the first-party API — <strong>Amazon Bedrock</strong> (the <code>AnthropicBedrockMantle</code> client) or <strong>Google Vertex AI</strong> (the <code>AnthropicVertex</code> client). Same <code>messages.create</code> surface; the difference is auth (IAM / ADC) and, on Bedrock, an <code>anthropic.</code> prefix on model IDs.</p></div>
+      <div class="call call--note"><div class="call__k">● Note</div><p>If your org already lives on a hyperscaler, you can reach Claude <em>through</em> it instead of the first-party API — <strong>Amazon Bedrock</strong> (the <code>AnthropicBedrock</code> client) or <strong>Google Vertex AI</strong> (the <code>AnthropicVertex</code> client). Same <code>messages.create</code> surface; the difference is auth (IAM / ADC) and, on Bedrock, an <code>anthropic.</code> prefix on model IDs.</p></div>
     </section>
 
     <section id="l5">

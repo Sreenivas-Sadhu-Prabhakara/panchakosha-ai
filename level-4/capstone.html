@@ -1,3 +1,5 @@
+<!DOCTYPE html>
+<html lang="en">
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Level 4 Capstone · Ship a RAG-Powered Assistant | Panchakosha AI</title>
@@ -21,7 +23,7 @@
       <a href="../level-1/index.html">1 · Use</a>
       <a href="../level-2/index.html">2 · Master</a>
       <a href="../level-3/index.html">3 · Understand</a>
-      <a href="index.html" aria-current="page">4 · Build</a>
+      <a href="index.html">4 · Build</a>
       <a href="../level-5/index.html">5 · Innovate</a>
     </nav>
   </div>
@@ -36,7 +38,7 @@
 
   <div class="capstone" style="margin:2rem 0">
     <h2 style="margin-top:0">The goal</h2>
-    <p style="margin-bottom:0">A live endpoint — say <code>POST /ask</code> — that answers questions <strong>from documents you supply</strong>, with the API key server-side, a small eval set proving it works, and a short note on what it costs to run. Every Level 4 skill, wired into one deployable service.</p>
+    <p style="margin-bottom:0">A live endpoint — say <code>POST /ask</code> — that answers questions <strong>from documents you supply</strong>, with the API key server-side, a small eval set proving it works, and a short note on what it costs to run. The core build skills from this level, wired into one deployable service.</p>
   </div>
 
   <h2>Build steps</h2>
@@ -131,6 +133,7 @@ print(f"{passed}/{len(GOLDEN)} passed")</pre></div>
     <p style="margin-bottom:.4rem">✓ Answers <strong>cite the retrieved context</strong> and say "I don't know" when it's absent.<br>
     ✓ The API key is <strong>server-side</strong> — nowhere in the client or the container image.<br>
     ✓ There's an <strong>eval set</strong> that runs and reports a pass rate.<br>
+    ✓ One <strong>guardrail</strong> (an input check that refuses off-scope or oversized requests) and one <strong>log line</strong> per request (a trace id + token counts) are in place.<br>
     ✓ It's <strong>deployed</strong> to a public URL that responds to a real request.</p>
   </div>
 
