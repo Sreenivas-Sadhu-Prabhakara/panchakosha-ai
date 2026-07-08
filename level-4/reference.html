@@ -111,6 +111,26 @@ console.log(msg.content[0].text);</pre></div>
   <div class="call call--note"><div class="call__k">● Note</div><p>Model IDs are current as of 2026 and do change — always confirm the latest on the <a href="https://docs.anthropic.com/en/docs/about-claude/models" target="_blank" rel="noopener">models page <span class="ext" aria-hidden="true">↗</span></a>. The durable habit is the <em>tiering</em> (small → balanced → most-capable), not any one string.</p></div>
 
   <!-- GLOSSARY -->
+  <!-- STACK AT A GLANCE -->
+  <h2 style="margin-top:2.5rem">The builder's stack at a glance</h2>
+  <p style="color:var(--ink-mute);margin-top:-.4rem">The tools from 4.8 in one place. Tags: <span class="pill pill--free">Free tier</span> / <span class="pill pill--oss">Open source</span> / <span class="pill pill--paid">Usage-based</span>. API &amp; infra pricing is usage-based and moves — confirm on each vendor's page.</p>
+
+  <div class="tool-cat"><h3>APIs · vectors · embeddings</h3><span>engine &amp; memory</span></div>
+  <div class="tool-grid">
+    <a class="tool" href="https://docs.anthropic.com" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">A</span><span class="tool__name">Claude API <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">The default model engine for this level.</p><p class="tool__win"><b>Win</b> — writing, analysis, tool use.</p><div class="tool__price"><span class="pill pill--paid">Usage-based</span><span class="tool__from">free credits to start</span></div></a>
+    <a class="tool" href="https://www.pinecone.io" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">P</span><span class="tool__name">Pinecone <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Managed vector DB for production RAG.</p><p class="tool__win"><b>Win</b> — zero-ops retrieval.</p><div class="tool__price"><span class="pill pill--free">Free tier</span><span class="tool__from">then usage-based</span></div></a>
+    <a class="tool" href="https://github.com/pgvector/pgvector" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">P</span><span class="tool__name">pgvector <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Vector search inside Postgres.</p><p class="tool__win"><b>Win</b> — one less service to run.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+    <a class="tool" href="https://www.voyageai.com" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">V</span><span class="tool__name">Voyage AI <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Hosted embeddings recommended for RAG.</p><p class="tool__win"><b>Win</b> — best retrieval via API.</p><div class="tool__price"><span class="pill pill--free">Free tier</span><span class="tool__from">then usage-based</span></div></a>
+  </div>
+
+  <div class="tool-cat"><h3>Frameworks · evals · deploy</h3><span>glue &amp; ship</span></div>
+  <div class="tool-grid">
+    <a class="tool" href="https://www.llamaindex.ai" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">L</span><span class="tool__name">LlamaIndex <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Data framework for RAG pipelines.</p><p class="tool__win"><b>Win</b> — docs → retrieval fast.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+    <a class="tool" href="https://langfuse.com" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">L</span><span class="tool__name">Langfuse <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Open-source LLM tracing &amp; evals.</p><p class="tool__win"><b>Win</b> — see &amp; score what ran.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">self-host free · cloud tier</span></div></a>
+    <a class="tool" href="https://modal.com" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">M</span><span class="tool__name">Modal <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Serverless compute &amp; GPUs from code.</p><p class="tool__win"><b>Win</b> — ship a backend, no infra.</p><div class="tool__price"><span class="pill pill--free">Free tier</span><span class="tool__from">credits · then usage</span></div></a>
+    <a class="tool" href="https://huggingface.co" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">H</span><span class="tool__name">Hugging Face <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Open models, datasets, and Spaces.</p><p class="tool__win"><b>Win</b> — open models &amp; hosting.</p><div class="tool__price"><span class="pill pill--free">Free tier</span><span class="tool__from">then paid compute</span></div></a>
+  </div>
+
   <h2 style="margin-top:2.5rem">Developer glossary</h2>
   <div class="panel">
     <dl style="margin:0;display:grid;gap:.9rem">

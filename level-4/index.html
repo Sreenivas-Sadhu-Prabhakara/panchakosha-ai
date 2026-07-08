@@ -43,7 +43,7 @@
   <div class="chips">
     <span class="chip">👤 For <b>developers</b></span>
     <span class="chip">⏱️ <b>~6 hours</b>, hands-on</span>
-    <span class="chip">🧰 8 lessons</span>
+    <span class="chip">🧰 9 lessons</span>
     <span class="chip">🏛️ 1 capstone</span>
     <span class="chip">🎒 reference pack</span>
   </div>
@@ -66,6 +66,7 @@
       <li><a href="#l5">4.5 · Evals &amp; testing</a></li>
       <li><a href="#l6">4.6 · Guardrails &amp; cost</a></li>
       <li><a href="#l7">4.7 · Observability in prod</a></li>
+      <li><a href="#l8">4.8 · The builder's stack</a></li>
       <li><a href="capstone.html">🏛️ Capstone</a></li>
       <li><a href="reference.html">🎒 Reference pack</a></li>
     </ol>
@@ -402,8 +403,62 @@ def ask(user_input: str) -> dict:
     # what turns a demo into a product that gets better over time.</pre></div>
       <div class="call call--note"><div class="call__k">● Note</div><p>Store prompts and responses somewhere you can query them, but treat them as sensitive: redact secrets and personal data before logging, and check your privacy obligations before persisting user content. Observability should never become a second copy of data you promised to protect.</p></div>
 
+    </section>
+
+    <section id="l8">
+      <p class="eyebrow">Lesson 4.8</p>
+      <h2>The builder's stack — tools for shipping AI apps</h2>
+      <p>You've built the loop by hand — API call, retrieval, evals, deploy. In practice you'll lean on a stack of tools for each layer. Here's the 2026 landscape a working AI engineer draws from, grouped by <strong>the layer it serves</strong>. Most are open-source or have a real free tier; you can build a serious app spending nothing until you scale.</p>
+      <div class="call call--insight"><div class="call__k">◆ Insight</div><p>Pick <strong>boring, well-documented</strong> tools for the layers you don't want to think about, and spend your innovation budget on the one layer that's actually your product. A managed vector DB and an off-the-shelf eval harness are usually the right call — reinvent them only if that <em>is</em> the thing you're building.</p></div>
+
+      <div class="tool-cat"><h3>Model APIs &amp; access</h3><span>the engine</span></div>
+      <div class="tool-grid">
+        <a class="tool" href="https://docs.anthropic.com" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">A</span><span class="tool__name">Claude API <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Anthropic's Messages API — the default engine used throughout this level.</p><p class="tool__win"><b>Reach for it</b> for writing, analysis, tool use, and long context.</p><div class="tool__price"><span class="pill pill--paid">Usage-based</span><span class="tool__from">pay per token · free credits to start</span></div></a>
+        <a class="tool" href="https://ai.google.dev" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">G</span><span class="tool__name">Gemini API <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Google's models via AI Studio, with a genuinely usable free tier.</p><p class="tool__win"><b>Reach for it</b> to prototype free and for huge context windows.</p><div class="tool__price"><span class="pill pill--free">Free tier</span><span class="tool__from">then usage-based</span></div></a>
+        <a class="tool" href="https://aws.amazon.com/bedrock/" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">B</span><span class="tool__name">Amazon Bedrock <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Managed access to Claude and other models inside AWS (the <code>AnthropicBedrock</code> client).</p><p class="tool__win"><b>Reach for it</b> when your data and IAM already live on AWS.</p><div class="tool__price"><span class="pill pill--paid">Usage-based</span><span class="tool__from">pay per token</span></div></a>
+        <a class="tool" href="https://cloud.google.com/vertex-ai" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">V</span><span class="tool__name">Vertex AI <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Managed Claude &amp; Gemini on Google Cloud (the <code>AnthropicVertex</code> client).</p><p class="tool__win"><b>Reach for it</b> when you're building on GCP.</p><div class="tool__price"><span class="pill pill--paid">Usage-based</span><span class="tool__from">pay per token</span></div></a>
+      </div>
+
+      <div class="tool-cat"><h3>Vector databases &amp; search</h3><span>the memory</span></div>
+      <div class="tool-grid">
+        <a class="tool" href="https://www.pinecone.io" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">P</span><span class="tool__name">Pinecone <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Fully-managed vector database built for production RAG at scale.</p><p class="tool__win"><b>Reach for it</b> when you want zero ops and it to just work.</p><div class="tool__price"><span class="pill pill--free">Free tier</span><span class="tool__from">then usage-based</span></div></a>
+        <a class="tool" href="https://qdrant.tech" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">Q</span><span class="tool__name">Qdrant <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Fast open-source vector DB with an optional managed cloud.</p><p class="tool__win"><b>Reach for it</b> to self-host, or start free on their cloud.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">self-host free · cloud tier</span></div></a>
+        <a class="tool" href="https://www.trychroma.com" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">C</span><span class="tool__name">Chroma <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Lightweight open-source embedding database — great for local dev.</p><p class="tool__win"><b>Reach for it</b> to prototype RAG in a few lines, locally.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+        <a class="tool" href="https://github.com/pgvector/pgvector" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">P</span><span class="tool__name">pgvector <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Vector search as a Postgres extension — no new database to run.</p><p class="tool__win"><b>Reach for it</b> when you already have Postgres and want one less service.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+      </div>
+
+      <div class="tool-cat"><h3>Embeddings</h3><span>text → vectors</span></div>
+      <div class="tool-grid">
+        <a class="tool" href="https://www.voyageai.com" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">V</span><span class="tool__name">Voyage AI <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">High-quality hosted embeddings — Anthropic's recommended pairing for RAG.</p><p class="tool__win"><b>Reach for it</b> for the best retrieval quality via an API.</p><div class="tool__price"><span class="pill pill--free">Free tier</span><span class="tool__from">then usage-based</span></div></a>
+        <a class="tool" href="https://www.sbert.net" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">S</span><span class="tool__name">sentence-transformers <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Run open-source embedding models locally — no API, no per-call cost.</p><p class="tool__win"><b>Reach for it</b> for private, free, offline embeddings.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+        <a class="tool" href="https://cohere.com/embeddings" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">C</span><span class="tool__name">Cohere Embed <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Strong multilingual embeddings API with a trial tier.</p><p class="tool__win"><b>Reach for it</b> for multilingual retrieval.</p><div class="tool__price"><span class="pill pill--free">Free tier</span><span class="tool__from">then usage-based</span></div></a>
+      </div>
+
+      <div class="tool-cat"><h3>Orchestration frameworks</h3><span>the glue</span></div>
+      <div class="tool-grid">
+        <a class="tool" href="https://www.llamaindex.ai" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">L</span><span class="tool__name">LlamaIndex <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">A data framework for RAG — loaders, indexes, and query engines.</p><p class="tool__win"><b>Reach for it</b> to wire documents into retrieval fast.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+        <a class="tool" href="https://www.langchain.com" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">L</span><span class="tool__name">LangChain <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">A broad framework of building blocks for LLM apps and chains.</p><p class="tool__win"><b>Reach for it</b> for prebuilt integrations — but keep it thin.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+        <a class="tool" href="https://sdk.vercel.ai" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">V</span><span class="tool__name">Vercel AI SDK <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">A TypeScript toolkit for streaming AI UIs and tool calls.</p><p class="tool__win"><b>Reach for it</b> to build AI into a web frontend.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+      </div>
+
+      <div class="tool-cat"><h3>Evals &amp; observability</h3><span>know it works</span></div>
+      <div class="tool-grid">
+        <a class="tool" href="https://langfuse.com" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">L</span><span class="tool__name">Langfuse <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Open-source LLM observability — traces, evals, and prompt metrics.</p><p class="tool__win"><b>Reach for it</b> to see and score what your app actually did.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">self-host free · cloud tier</span></div></a>
+        <a class="tool" href="https://www.langchain.com/langsmith" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">L</span><span class="tool__name">LangSmith <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Tracing, datasets, and evals for LLM apps (framework-agnostic).</p><p class="tool__win"><b>Reach for it</b> to build a real eval suite with a UI.</p><div class="tool__price"><span class="pill pill--free">Free tier</span><span class="tool__from">then paid plans</span></div></a>
+        <a class="tool" href="https://www.helicone.ai" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">H</span><span class="tool__name">Helicone <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Drop-in observability proxy — logging and cost tracking in one line.</p><p class="tool__win"><b>Reach for it</b> for instant logging without code changes.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free tier · self-host</span></div></a>
+      </div>
+
+      <div class="tool-cat"><h3>Deploy &amp; run</h3><span>ship it</span></div>
+      <div class="tool-grid">
+        <a class="tool" href="https://modal.com" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">M</span><span class="tool__name">Modal <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Serverless compute for AI — deploy Python functions and GPUs from code.</p><p class="tool__win"><b>Reach for it</b> to ship a backend or a GPU job without infra.</p><div class="tool__price"><span class="pill pill--free">Free tier</span><span class="tool__from">monthly credits · then usage</span></div></a>
+        <a class="tool" href="https://replicate.com" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">R</span><span class="tool__name">Replicate <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Run and fine-tune open models behind a simple API.</p><p class="tool__win"><b>Reach for it</b> to call open-source models without hosting them.</p><div class="tool__price"><span class="pill pill--paid">Usage-based</span><span class="tool__from">pay per second</span></div></a>
+        <a class="tool" href="https://huggingface.co" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">H</span><span class="tool__name">Hugging Face <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">The hub for open models, datasets, and one-click Spaces demos.</p><p class="tool__win"><b>Reach for it</b> for open models, hosting, and Inference endpoints.</p><div class="tool__price"><span class="pill pill--free">Free tier</span><span class="tool__from">then paid compute</span></div></a>
+      </div>
+
+      <div class="call call--note"><div class="call__k">● Free to start</div><p>Tags: <span class="pill pill--free">Free tier</span> usable no-cost plan · <span class="pill pill--oss">Open source</span> free &amp; self-hostable · <span class="pill pill--paid">Usage-based</span> pay per token/second. Nearly every layer here has a free or open path, so you can build and demo a full RAG app for $0 and only pay once real traffic arrives. Pricing for APIs and infra is usage-based and changes often — see each vendor's pricing page and the <a href="https://www.anthropic.com/pricing" target="_blank" rel="noopener">Claude pricing page <span class="ext" aria-hidden="true">↗</span></a> for current numbers.</p></div>
+
       <div style="margin-top:2.5rem;text-align:center">
-        <p style="color:var(--ink-soft)">That's the craft sheath. You can now build, ship, test and operate a real AI service end to end.</p>
+        <p style="color:var(--ink-soft)">That's the craft sheath. You can now build, ship, test and operate a real AI service end to end — and you know the stack that does each layer for you.</p>
         <button class="btn btn--solid" data-complete data-level="4" data-lesson="course">Mark this course complete</button>
       </div>
     </section>

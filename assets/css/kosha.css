@@ -288,6 +288,7 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .pill--free  { color: #93d9ab; border-color: color-mix(in srgb, #93d9ab 42%, transparent); background: color-mix(in srgb, #93d9ab 13%, transparent); }
 .pill--trial { color: #e6c079; border-color: color-mix(in srgb, #e6c079 42%, transparent); background: color-mix(in srgb, #e6c079 13%, transparent); }
 .pill--paid  { color: var(--ink-soft); border-color: var(--hairline-2); background: var(--bg-2); }
+.pill--oss   { color: #7ec8dc; border-color: color-mix(in srgb, #7ec8dc 42%, transparent); background: color-mix(in srgb, #7ec8dc 13%, transparent); }
 .tool__from { font-family: var(--mono); font-size: .68rem; color: var(--ink-mute); }
 /* pricing table */
 .price-table { width: 100%; border-collapse: collapse; font-size: .9rem; }

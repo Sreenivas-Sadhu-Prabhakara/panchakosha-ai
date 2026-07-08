@@ -43,7 +43,7 @@
   <div class="chips">
     <span class="chip">🛠️ For <b>engineers</b></span>
     <span class="chip">⏱️ <b>~8 hours</b>, hands-on</span>
-    <span class="chip">🧰 8 lessons</span>
+    <span class="chip">🧰 9 lessons</span>
     <span class="chip">🏛️ 1 capstone</span>
     <span class="chip">🎒 reference pack</span>
   </div>
@@ -66,6 +66,7 @@
       <li><a href="#l5">5.5 · Agentic foundations</a></li>
       <li><a href="#l6">5.6 · Tool use &amp; MCP</a></li>
       <li><a href="#l7">5.7 · Multi-agent &amp; frontier</a></li>
+      <li><a href="#l8">5.8 · The ML &amp; agent stack</a></li>
       <li><a href="capstone.html">🏛️ Capstone</a></li>
       <li><a href="reference.html">🎒 Reference pack</a></li>
     </ol>
@@ -378,8 +379,56 @@ print(f"success rate: {passed}/{len(cases)} = {passed / len(cases):.0%}")</pre><
       <p>This is the frontier, and it demands care. Autonomous systems that take real actions can fail in compounding ways, so <strong>safety and oversight</strong> are engineering requirements, not afterthoughts: keep a human in the loop for consequential actions, scope each tool's permissions tightly, log every step for audit, and set hard limits (max iterations, cost caps) so a loop can't run away.</p>
       <div class="call call--warn"><div class="call__k">▲ Careful</div><p>Capability and control scale together. An agent that can send email, spend money, or run code can do so wrongly at machine speed. Build the guardrails <em>before</em> you widen the autonomy: confirmations on irreversible actions, least-privilege tools, and reliability numbers you actually trust. Responsible frontier work is measured, gated, and observable — not "ship it and hope."</p></div>
 
+    </section>
+
+    <section id="l8">
+      <p class="eyebrow">Lesson 5.8</p>
+      <h2>The ML &amp; agent stack</h2>
+      <p>You reached working agents with the raw API and a loop — no framework required. But as you build bigger systems (multi-agent, fine-tuning, evaluation), a stack of tools saves real effort. Here's what ML and agent engineers reach for in 2026, grouped by <strong>what it helps you do</strong>. Almost all of it is open source — you can learn, train small models, and run agents end to end for free.</p>
+      <div class="call call--insight"><div class="call__k">◆ Insight</div><p>A framework is a convenience, not a requirement. Reach for one when it removes <em>real</em> boilerplate — persistent state, multi-agent hand-offs, tracing — not because it's expected. The raw <code>messages.create</code> loop you already wrote is a legitimate production choice.</p></div>
+
+      <div class="tool-cat"><h3>Agent frameworks</h3><span>orchestrate the loop</span></div>
+      <div class="tool-grid">
+        <a class="tool" href="https://www.langchain.com/langgraph" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">L</span><span class="tool__name">LangGraph <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Model agents as stateful graphs with cycles, memory, and human-in-the-loop.</p><p class="tool__win"><b>Reach for it</b> for controllable, resumable agent workflows.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+        <a class="tool" href="https://www.crewai.com" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">C</span><span class="tool__name">CrewAI <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Role-based multi-agent orchestration — agents with jobs that collaborate.</p><p class="tool__win"><b>Reach for it</b> to stand up a team of specialized agents fast.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free · paid cloud</span></div></a>
+        <a class="tool" href="https://microsoft.github.io/autogen/" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">A</span><span class="tool__name">AutoGen <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Microsoft's framework for multi-agent conversations and workflows.</p><p class="tool__win"><b>Reach for it</b> to experiment with agents that talk to each other.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+        <a class="tool" href="https://openai.github.io/openai-agents-python/" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">O</span><span class="tool__name">OpenAI Agents SDK <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">A lightweight SDK for agents, handoffs, and guardrails.</p><p class="tool__win"><b>Reach for it</b> for a minimal, typed agent runtime.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+        <a class="tool" href="https://docs.anthropic.com" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">C</span><span class="tool__name">Claude Agent SDK <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Anthropic's toolkit for building agents on Claude with tools and files.</p><p class="tool__win"><b>Reach for it</b> to build Claude-native agents with less plumbing.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free · API usage applies</span></div></a>
+      </div>
+
+      <div class="tool-cat"><h3>Model Context Protocol</h3><span>connect agents to tools — see 5.6</span></div>
+      <div class="tool-grid">
+        <a class="tool" href="https://modelcontextprotocol.io" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">M</span><span class="tool__name">MCP spec <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">The open standard for exposing tools, data, and context to any AI client.</p><p class="tool__win"><b>Reach for it</b> to make a capability reusable across every agent.</p><div class="tool__price"><span class="pill pill--oss">Open standard</span><span class="tool__from">free</span></div></a>
+        <a class="tool" href="https://github.com/modelcontextprotocol/servers" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">M</span><span class="tool__name">MCP servers <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Reference and community servers — filesystem, git, databases, and more.</p><p class="tool__win"><b>Reach for it</b> to plug in a capability instead of coding it.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+      </div>
+
+      <div class="tool-cat"><h3>ML frameworks</h3><span>build &amp; train models</span></div>
+      <div class="tool-grid">
+        <a class="tool" href="https://pytorch.org" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">P</span><span class="tool__name">PyTorch <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">The dominant deep-learning framework — define, train, and run networks.</p><p class="tool__win"><b>Reach for it</b> as your default for any real model work.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+        <a class="tool" href="https://huggingface.co/docs/transformers" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">H</span><span class="tool__name">HF Transformers <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Thousands of pretrained models with a common training/inference API.</p><p class="tool__win"><b>Reach for it</b> to load or fine-tune an open model in minutes.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+        <a class="tool" href="https://jax.dev" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">J</span><span class="tool__name">JAX <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">High-performance array computing with autodiff, for research at scale.</p><p class="tool__win"><b>Reach for it</b> for cutting-edge or TPU-heavy training.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+      </div>
+
+      <div class="tool-cat"><h3>Fine-tuning &amp; training</h3><span>adapt a model — see 5.3</span></div>
+      <div class="tool-grid">
+        <a class="tool" href="https://huggingface.co/docs/peft" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">P</span><span class="tool__name">HF PEFT <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Parameter-efficient fine-tuning — LoRA/QLoRA adapters in a few lines.</p><p class="tool__win"><b>Reach for it</b> to fine-tune on one GPU without touching all the weights.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+        <a class="tool" href="https://unsloth.ai" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">U</span><span class="tool__name">Unsloth <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Fine-tune 2× faster with far less memory, via drop-in kernels.</p><p class="tool__win"><b>Reach for it</b> to train bigger models on modest hardware.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+        <a class="tool" href="https://axolotl.ai" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">A</span><span class="tool__name">Axolotl <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Config-driven fine-tuning — describe the run in YAML, it handles the rest.</p><p class="tool__win"><b>Reach for it</b> to fine-tune reproducibly without boilerplate.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+        <a class="tool" href="https://www.together.ai" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">T</span><span class="tool__name">Together AI <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Hosted training and inference for open models, when you lack the GPUs.</p><p class="tool__win"><b>Reach for it</b> to fine-tune and serve without owning hardware.</p><div class="tool__price"><span class="pill pill--paid">Usage-based</span><span class="tool__from">pay per token · free credits</span></div></a>
+      </div>
+
+      <div class="tool-cat"><h3>Track &amp; run</h3><span>measure and serve</span></div>
+      <div class="tool-grid">
+        <a class="tool" href="https://wandb.ai" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">W</span><span class="tool__name">Weights &amp; Biases <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Experiment tracking — log metrics, compare runs, and share results.</p><p class="tool__win"><b>Reach for it</b> to know which training run actually worked.</p><div class="tool__price"><span class="pill pill--free">Free tier</span><span class="tool__from">free personal · paid teams</span></div></a>
+        <a class="tool" href="https://mlflow.org" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">M</span><span class="tool__name">MLflow <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Open-source ML lifecycle — tracking, model registry, and packaging.</p><p class="tool__win"><b>Reach for it</b> to self-host experiment tracking and a model registry.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+        <a class="tool" href="https://ollama.com" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">O</span><span class="tool__name">Ollama <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">Run open LLMs locally with one command — great for private dev.</p><p class="tool__win"><b>Reach for it</b> to prototype against a local model for free.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+        <a class="tool" href="https://docs.vllm.ai" target="_blank" rel="noopener"><div class="tool__top"><span class="tool__badge" aria-hidden="true">V</span><span class="tool__name">vLLM <span class="ext" aria-hidden="true">↗</span></span></div><p class="tool__desc">A high-throughput inference server for open models in production.</p><p class="tool__win"><b>Reach for it</b> to serve an open model fast and efficiently.</p><div class="tool__price"><span class="pill pill--oss">Open source</span><span class="tool__from">free</span></div></a>
+      </div>
+
+      <div class="call call--note"><div class="call__k">● Free to start</div><p>Tags: <span class="pill pill--oss">Open source</span> free &amp; self-hostable · <span class="pill pill--free">Free tier</span> usable no-cost plan · <span class="pill pill--paid">Usage-based</span> pay per use. Almost the entire ML and agent stack is open source — with a free notebook (Colab/Kaggle) or a local model via Ollama, you can learn, fine-tune, and run multi-agent systems for $0. You only pay when you rent GPUs or call a hosted API — and those prices move, so check each vendor.</p></div>
+
       <div style="margin-top:2.5rem;text-align:center">
-        <p style="color:var(--ink-soft)">That's the core. From gradient descent to governed, tool-using agents — you now understand how modern AI is built, and how to build with it responsibly.</p>
+        <p style="color:var(--ink-soft)">That's the core. From gradient descent to governed, tool-using agents — you now understand how modern AI is built, how to build with it responsibly, and the open stack that gets you there.</p>
         <button class="btn btn--solid" data-complete data-level="5" data-lesson="course">Mark this course complete</button>
       </div>
     </section>
