@@ -281,8 +281,19 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 .tool__name { font-weight: 700; color: var(--ink); font-size: .95rem; display: inline-flex; align-items: center; gap: .35rem; }
 .tool__name .ext { color: var(--accent); font-size: .7rem; font-family: var(--mono); }
 .tool__desc { color: var(--ink-mute); font-size: .83rem; margin: 0 0 .6rem; line-height: 1.5; }
-.tool__win { font-size: .8rem; color: var(--ink-soft); border-top: 1px solid var(--hairline); padding-top: .55rem; margin: 0 0 0; margin-top: auto; }
+.tool__win { font-size: .8rem; color: var(--ink-soft); border-top: 1px solid var(--hairline); padding-top: .55rem; margin: 0; margin-top: auto; }
 .tool__win b { color: var(--accent); font-weight: 600; }
+.tool__price { display: flex; flex-wrap: wrap; gap: .4rem; align-items: center; margin-top: .5rem; }
+.pill { font-family: var(--mono); font-size: .62rem; letter-spacing: .05em; text-transform: uppercase; padding: .18rem .5rem; border-radius: 999px; border: 1px solid; white-space: nowrap; }
+.pill--free  { color: #93d9ab; border-color: color-mix(in srgb, #93d9ab 42%, transparent); background: color-mix(in srgb, #93d9ab 13%, transparent); }
+.pill--trial { color: #e6c079; border-color: color-mix(in srgb, #e6c079 42%, transparent); background: color-mix(in srgb, #e6c079 13%, transparent); }
+.pill--paid  { color: var(--ink-soft); border-color: var(--hairline-2); background: var(--bg-2); }
+.tool__from { font-family: var(--mono); font-size: .68rem; color: var(--ink-mute); }
+/* pricing table */
+.price-table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.price-table th { text-align: left; color: var(--ink-mute); font-family: var(--mono); font-size: .72rem; letter-spacing: .06em; text-transform: uppercase; padding: .6rem .9rem; }
+.price-table td { border-top: 1px solid var(--hairline); padding: .6rem .9rem; color: var(--ink-soft); }
+.price-table td:first-child { color: var(--ink); font-weight: 600; }
 
 /* ---- Progress dots ----------------------------------------- */
 .progress { display: inline-flex; gap: 0.4rem; align-items: center; }
