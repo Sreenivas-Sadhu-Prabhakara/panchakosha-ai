@@ -269,6 +269,21 @@ a:hover { text-decoration: underline; text-underline-offset: 3px; }
 /* download / cheatsheet strip */
 .take { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1rem; }
 
+/* ---- Tool directory (job-to-be-done app cards) ------------- */
+.tool-cat { margin: 2.1rem 0 .85rem; display: flex; align-items: baseline; gap: .7rem; flex-wrap: wrap; }
+.tool-cat h3 { font-size: var(--step-1); margin: 0; scroll-margin-top: 84px; }
+.tool-cat span { font-family: var(--mono); font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: var(--ink-mute); }
+.tool-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(232px, 1fr)); gap: .8rem; }
+.tool { display: flex; flex-direction: column; background: var(--panel); border: 1px solid var(--hairline); border-radius: var(--radius); padding: 1rem 1.1rem; transition: transform .18s var(--ease), border-color .18s, background .18s; }
+.tool:hover { transform: translateY(-3px); border-color: var(--accent-line); background: var(--panel-2); text-decoration: none; }
+.tool__top { display: flex; align-items: center; gap: .6rem; margin-bottom: .55rem; }
+.tool__badge { width: 32px; height: 32px; flex: none; border-radius: 8px; display: grid; place-items: center; font-family: var(--display); font-weight: 600; font-size: .95rem; color: var(--accent); background: var(--accent-soft); border: 1px solid var(--accent-line); }
+.tool__name { font-weight: 700; color: var(--ink); font-size: .95rem; display: inline-flex; align-items: center; gap: .35rem; }
+.tool__name .ext { color: var(--accent); font-size: .7rem; font-family: var(--mono); }
+.tool__desc { color: var(--ink-mute); font-size: .83rem; margin: 0 0 .6rem; line-height: 1.5; }
+.tool__win { font-size: .8rem; color: var(--ink-soft); border-top: 1px solid var(--hairline); padding-top: .55rem; margin: 0 0 0; margin-top: auto; }
+.tool__win b { color: var(--accent); font-weight: 600; }
+
 /* ---- Progress dots ----------------------------------------- */
 .progress { display: inline-flex; gap: 0.4rem; align-items: center; }
 .progress i { width: 9px; height: 9px; border-radius: 50%; border: 1.5px solid var(--accent-line); display: inline-block; }
